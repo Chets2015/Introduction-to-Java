@@ -1,0 +1,330 @@
+ava Reader Class
+In this tutorial, we will learn about Java Reader, its subclasses and its methods with the help of an example.
+
+The Reader class of the java.io package is an abstract superclass that represents a stream of characters.
+
+Since Reader is an abstract class, it is not useful by itself. However, its subclasses can be used to read data.
+
+Subclasses of Reader
+In order to use the functionality of Reader, we can use its subclasses. Some of them are:
+
+BufferedReader
+InputStreamReader
+FileReader
+StringReader
+Subclasses of Java Reader are BufferedReader, InputStreamReader, FileReader and StringReader.
+
+We will learn about all these subclasses in the next tutorial.
+
+Create a Reader
+In order to create a Reader, we must import the java.io.Reader package first. Once we import the package, here is how we can create the reader.
+
+// Creates a Reader
+Reader input = new FileReader();
+Here, we have created a reader using the FileReader class. It is because Reader is an abstract class. Hence we cannot create an object of Reader.
+
+Note: We can also create readers from other subclasses of Reader.
+
+Methods of Reader
+The Reader class provides different methods that are implemented by its subclasses. Here are some of the commonly used methods:
+
+ready() - checks if the reader is ready to be read
+read(char[] array) - reads the characters from the stream and stores in the specified array
+read(char[] array, int start, int length) - reads the number of characters equal to length from the stream and stores in the specified array starting from the start
+mark() - marks the position in the stream up to which data has been read
+reset() - returns the control to the point in the stream where the mark is set
+skip() - discards the specified number of characters from the stream
+Example: Reader Using FileReader
+
+Here is how we can implement Reader using the FileReader class.
+
+Suppose we have a file named input.txt with the following content.
+
+This is a line of text inside the file.
+Let's try to read this file using FileReader (a subclass of Reader).
+
+import java.io.Reader;
+import java.io.FileReader;
+
+class Main {
+    public static void main(String[] args) {
+
+        // Creates an array of character
+        char[] array = new char[100];
+
+        try {
+            // Creates a reader using the FileReader
+            Reader input = new FileReader("input.txt");
+
+            // Checks if reader is ready 
+            System.out.println("Is there data in the stream?  " + input.ready());
+
+            // Reads characters
+            input.read(array);
+            System.out.println("Data in the stream:");
+            System.out.println(array);
+
+            // Closes the reader
+            input.close();
+        }
+
+        catch(Exception e) {
+            e.getStackTrace();
+        }
+    }
+}
+Output
+
+Is there data in the stream?  true
+Data in the stream:
+This is a line of text inside the file.
+In the above example, we have created a reader using the FileReader class. The reader is linked with the file input.txt.
+
+Reader input = new FileReader("input.txt");
+To read data from the input.txt file, we have implemented these methods.
+
+input.read();       // to read data from the reader
+input.close();      // to close the reader
+To learn more, visit Java Reader (official Java documentation).
+
+Java Writer Class
+In this tutorial, we will learn about Java Writer, its subclasses and its methods with the help of an example.
+
+The Writer class of the java.io package is an abstract superclass that represents a stream of characters.
+
+Since Writer is an abstract class, it is not useful by itself. However, its subclasses can be used to write data.
+
+Subclasses of Writer
+In order to use the functionality of the Writer, we can use its subclasses. Some of them are:
+
+BufferedWriter
+OutputStreamWriter
+FileWriter
+StringWriter
+Subclasses of Java Writer are BufferedWriter, OutputStreamWriter, FileWriter and StringWriter.
+
+We will learn about all these subclasses in the next tutorial.
+
+Create a Writer
+In order to create a Writer, we must import the java.io.Writer package first. Once we import the package, here is how we can create the writer.
+
+// Creates a Writer
+Writer output = new FileWriter();
+Here, we have created a writer named output using the FileWriter class. It is because the Writer is an abstract class. Hence we cannot create an object of Writer.
+
+Note: We can also create writers from other subclasses of the Writer class.
+
+Methods of Writer
+
+The Writer class provides different methods that are implemented by its subclasses. Here are some of the methods:
+
+write(char[] array) - writes the characters from the specified array to the output stream
+write(String data) - writes the specified string to the writer
+append(char c) - inserts the specified character to the current writer
+flush() - forces to write all the data present in the writer to the corresponding destination
+close() - closes the writer
+Example: Writer Using FileWriter
+Here is how we can implement the Writer using the FileWriter class.
+
+import java.io.FileWriter;
+import java.io.Writer;
+
+public class Main {
+
+    public static void main(String args[]) {
+
+        String data = "This is the data in the output file";
+
+        try {
+            // Creates a Writer using FileWriter
+            Writer output = new FileWriter("output.txt");
+
+
+            // Writes string to the file
+            output.write(data);
+
+            // Closes the writer
+            output.close();
+        }
+
+        catch (Exception e) {
+            e.getStackTrace();
+        }
+    }
+}
+In the above example, we have created a writer using the FileWriter class. The writer is linked with the file output.txt.
+
+Writer output = new FileWriter("output.txt");
+To write data to the output.txt file, we have implemented these methods.
+
+output.write();      // To write data to the file
+output.close();      // To close the writer
+When we run the program, the output.txt file is filled with the following content.
+
+This is a line of text inside the file.
+To learn more, visit Java Writer (official Java documentation).
+
+Java InputStream Class
+In this tutorial, we will learn about the Java InputStream class and its methods with the help of an example.
+
+The InputStream class of the java.io package is an abstract superclass that represents an input stream of bytes.
+
+Since InputStream is an abstract class, it is not useful by itself. However, its subclasses can be used to read data.
+
+Subclasses of InputStream
+In order to use the functionality of InputStream, we can use its subclasses. Some of them are:
+
+FileInputStream
+ByteArrayInputStream
+ObjectInputStream
+Java InputStream subclasses are FileInputStream, ByteArrayInputStream and ObjectInputStream.
+
+We will learn about all these subclasses in the next tutorial.
+
+Create an InputStream
+In order to create an InputStream, we must import the java.io.InputStream package first. Once we import the package, here is how we can create the input stream.
+
+// Creates an InputStream
+InputStream object1 = new FileInputStream();
+Here, we have created an input stream using FileInputStream. It is because InputStream is an abstract class. Hence we cannot create an object of InputStream.
+
+Note: We can also create an input stream from other subclasses of InputStream.
+
+Methods of InputStream
+The InputStream class provides different methods that are implemented by its subclasses. Here are some of the commonly used methods:
+
+read() - reads one byte of data from the input stream
+read(byte[] array) - reads bytes from the stream and stores in the specified array
+available() - returns the number of bytes available in the input stream
+mark() - marks the position in the input stream up to which data has been read
+reset() - returns the control to the point in the stream where the mark was set
+markSupported() - checks if the mark() and reset() method is supported in the stream
+skips() - skips and discards the specified number of bytes from the input stream
+close() - closes the input stream
+Example: InputStream Using FileInputStream
+
+Here is how we can implement InputStream using the FileInputStream class.
+
+Suppose we have a file named input.txt with the following content.
+
+This is a line of text inside the file.
+Let's try to read this file using FileInputStream (a subclass of InputStream).
+
+import java.io.FileInputStream;
+import java.io.InputStream;
+
+public class Main {
+    public static void main(String args[]) {
+
+        byte[] array = new byte[100];
+
+        try {
+            InputStream input = new FileInputStream("input.txt");
+
+            System.out.println("Available bytes in the file: " + input.available());
+
+            // Read byte from the input stream
+            input.read(array);
+            System.out.println("Data read from the file: ");
+
+            // Convert byte array into string
+            String data = new String(array);
+            System.out.println(data);
+
+            // Close the input stream
+            input.close();
+        }
+        catch (Exception e) {
+            e.getStackTrace();
+        }
+    }
+}
+Output
+
+Available bytes in the file: 35
+Data read from the file:
+This is a line of text inside the file
+In the above example, we have created an input stream using the FileInputStream class. The input stream is linked with the file input.txt.
+
+InputStream input = new FileInputStream("input.txt");
+To read data from the input.txt file, we have implemented these two methods.
+
+input.read(array);      // to read data from the input stream
+input.close();             // to close the input stream
+
+\
+Java OutputStream Class
+In this tutorial, we will learn about the Java OutputStream and its methods with the help of an example.
+
+The OutputStream class of the java.io package is an abstract superclass that represents an output stream of bytes.
+
+Since OutputStream is an abstract class, it is not useful by itself. However, its subclasses can be used to write data.
+
+Subclasses of OutputStream
+In order to use the functionality of OutputStream, we can use its subclasses. Some of them are:
+
+FileOutputStream
+ByteArrayOutputStream
+ObjectOutputStream
+Subclasses of Java OutputStream are FileOutputStream, ByteArrayOutputStream and ObjectOutputStream.
+
+We will learn about all these subclasses in the next tutorial.
+
+Create an OutputStream
+In order to create an OutputStream, we must import the java.io.OutputStream package first. Once we import the package, here is how we can create the output stream.
+
+// Creates an OutputStream
+OutputStream object = new FileOutputStream();
+Here, we have created an object of output stream using FileOutputStream. It is because OutputStream is an abstract class, so we cannot create an object of OutputStream.
+
+Note: We can also create the output stream from other subclasses of the OutputStream class.
+
+Methods of OutputStream
+
+The OutputStream class provides different methods that are implemented by its subclasses. Here are some of the methods:
+
+write() - writes the specified byte to the output stream
+write(byte[] array) - writes the bytes from the specified array to the output stream
+flush() - forces to write all data present in output stream to the destination
+close() - closes the output stream
+Example: OutputStream Using FileOutputStream
+Here is how we can implement OutputStream using the FileOutputStream class.
+
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+
+public class Main {
+
+    public static void main(String args[]) {
+        String data = "This is a line of text inside the file.";
+
+        try {
+            OutputStream out = new FileOutputStream("output.txt");
+
+            // Converts the string into bytes
+            byte[] dataBytes = data.getBytes();
+
+            // Writes data to the output stream
+            out.write(dataBytes);
+            System.out.println("Data is written to the file.");
+
+            // Closes the output stream
+            out.close();
+        }
+
+        catch (Exception e) {
+            e.getStackTrace();
+        }
+    }
+}
+In the above example, we have created an output stream using the FileOutputStream class. The output stream is now linked with the file output.txt.
+
+OutputStream out = new FileOutputStream("output.txt");
+To write data to the output.txt file, we have implemented these methods.
+
+output.write();      // To write data to the file
+output.close();      // To close the output stream
+When we run the program, the output.txt file is filled with the following content.
+
+This is a line of text inside the file.
+To learn more, visit Java OutputStream (official Java documentation).

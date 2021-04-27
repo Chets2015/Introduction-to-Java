@@ -1,0 +1,257 @@
+Java Inheritance
+In this tutorial, we will learn about inheritance in Java with the help of examples.
+
+Inheritance is one of the key features of OOP (Object-oriented Programming) that allows us to define a new class from an existing class. For example,
+
+class Animal
+{
+    // eat() method
+    // sleep() method
+}
+class Dog extends Animal
+{
+    // bark() method
+}
+In Java, we use the extends keyword to inherit from a class. Here, we have inherited the Dog class from the Animal class.
+
+The Animal is the superclass (parent class or base class), and the Dog is a subclass (child class or derived class). The subclass inherits the fields and methods of the superclass.
+
+Java Inheritance Introduction
+
+is-a relationship
+Inheritance is an is-a relationship. We use inheritance only if an is-a relationship is present between the two classes.
+
+Here are some examples:
+
+A car is a vehicle.
+Orange is a fruit.
+A surgeon is a doctor.
+A dog is an animal.
+Example 1: Java Inheritance
+class Animal {
+
+   public void eat() {
+      System.out.println("I can eat");
+   }
+
+   public void sleep() {
+      System.out.println("I can sleep");
+   }
+}
+
+class Dog extends Animal {
+   public void bark() {
+      System.out.println("I can bark");
+   }
+}
+
+class Main {
+   public static void main(String[] args) {
+
+      Dog dog1 = new Dog();
+
+      dog1.eat();
+      dog1.sleep();
+
+      dog1.bark();
+   }
+}
+Output
+
+I can eat
+I can sleep
+I can bark
+Here, we have inherited a subclass Dog from superclass Animal. The Dog class inherits the methods eat() and sleep() from the Animal class.
+
+Hence, objects of the Dog class can access the members of both the Dog class and the Animal class.
+
+In Java inheritance, objects of subclass can call members of superclass.
+
+protected Keyword
+We learned about private and public access modifiers in previous tutorials.
+
+private members can be accessed only within the class
+public members can be accessed from anywhere
+
+You can also assign methods and fields protected. Protected members are accessible
+
+from within the class
+within its subclasses
+within the same package
+Here's a summary from where access modifiers can be accessed.
+
+ 	Class	Package	subclass	World
+public	Yes	Yes	Yes	Yes
+private	Yes	No	No	No
+protected	Yes	Yes	Yes	No
+Example 2: protected Keyword
+class Animal {
+   protected String type;
+   private String color;
+
+   public void eat() {
+      System.out.println("I can eat");
+   }
+
+   public void sleep() {
+      System.out.println("I can sleep");
+   }
+
+   public String getColor(){
+      return color;
+   }
+
+   public void setColor(String col){
+      color = col;
+   }
+}
+
+class Dog extends Animal {
+   public void displayInfo(String c){
+      System.out.println("I am a " + type);
+      System.out.println("My color is " + c);
+   }
+   public void bark() {
+      System.out.println("I can bark");
+   }
+}
+
+class Main {
+   public static void main(String[] args) {
+
+      Dog dog1 = new Dog();
+      dog1.eat();
+      dog1.sleep();
+      dog1.bark();
+ 
+      dog1.type = "mammal";
+      dog1.setColor("black");
+      dog1.displayInfo(dog1.getColor()); 
+   }
+}
+Output
+
+I can eat
+I can sleep
+I can bark
+I am a mammal
+My color is black
+Here, the type field inside the Animal class is protected. We have accessed this field from the Main class using
+
+dog1.type = "mammal";
+It is possible because both the Animal and Main classes are in the same package (same file).
+
+Java Method overriding
+From the above examples, we know that objects of a subclass can also access methods of its superclass.
+
+What happens if the same method is defined in both the superclass and subclass?
+
+Well, in that case, the method in the subclass overrides the method in the superclass. For example,
+
+Example 3: Method overriding Example
+class Animal {
+   protected String type = "animal";
+
+   public void eat() {
+      System.out.println("I can eat");
+   }
+
+   public void sleep() {
+      System.out.println("I can sleep");
+   }
+}
+
+class Dog extends Animal {
+  
+   @Override
+   public void eat() {
+      System.out.println("I eat dog food");
+   }
+
+   public void bark() {
+      System.out.println("I can bark");
+   }
+}
+
+class Main {
+   public static void main(String[] args) {
+
+      Dog dog1 = new Dog();
+      dog1.eat();
+      dog1.sleep();
+      dog1.bark();
+   }
+}
+Output
+
+I eat dog food
+I can sleep
+I can bark
+Here, eat() is present in both the superclass Animal and subclass Dog. We created an object dog1 of the subclass Dog.
+
+When we call eat() using the dog1 object, the method inside the Dog is called, and the same method of the superclass is not called. This is called method overriding.
+
+In the above program, we have used the @Overrideannotation to tell the compiler that we are overriding a method. However, it's not mandatory. We will learn about method overriding in detail in the next tutorial.
+
+If we need to call the eat() method of Animal from its subclasses, we use the super keyword.
+
+Example 4: super Keyword
+class Animal {
+   public Animal() {
+     System.out.println("I am an Animal");
+   }
+
+   public void eat() {
+     System.out.println("I can eat");
+   }
+}
+
+class Dog extends Animal {
+   public Dog(){
+      super();
+      System.out.println("I am a dog");
+   }
+
+  @Override
+  public void eat() {
+     super.eat();
+     System.out.println("I eat dog food");
+  }
+
+   public void bark() {
+      System.out.println("I can bark");
+   }
+}
+
+class Main {
+   public static void main(String[] args) {
+      Dog dog1 = new Dog();
+
+      dog1.eat();
+      dog1.bark();
+   }
+}
+Output
+
+I am an Animal
+I am a dog
+I can eat
+I eat dog food
+I can bark
+Here, we have used the super keyword to call the constructor using super(). Also, we have called the eat() method of Animal superclass using super.eat().
+
+Note the difference in the use of super while calling constructor and method. To learn more, visit the Java super keyword.
+
+Types of inheritance
+There are five types of inheritance.
+
+Single inheritance - Class B extends from class A only.
+Multilevel inheritance - Class B extends from class A; then class C extends from class B.
+Hierarchical inheritance - Class A acts as the superclass for classes B, C, and D.
+Multiple inheritance - Class C extends from interfaces A and B.
+Hybrid inheritance - Mix of two or more types of inheritance.
+Java doesn’t support multiple and hybrid inheritance through classes. However, we can achieve multiple inheritance in Java through interfaces. We will learn about interfaces in later chapters.
+
+Why use inheritance?
+The most important use is the reusability of code. The code that is present in the parent class doesn’t need to be written again in the child class.
+To achieve runtime polymorphism through method overriding. We will learn more about polymorphism in later chapters.

@@ -1,0 +1,162 @@
+Java Class and Objects
+In this tutorial, you will learn about object-oriented programming in Java and you will learn about Java classes and objects with the help of examples.
+
+Java is an object-oriented programming language. It is based on the concept of objects.
+
+These objects share two characteristics:
+
+state (fields)
+behavior (methods)
+For example,
+
+Lamp is an object
+State: on or off
+Behavior: turn on or turn off
+Bicycle is an object
+States: current gear, two wheels, number of gear, etc
+Behavior: braking, accelerating, changing gears, etc
+Principles of Object-oriented Programming:
+Encapsulation
+Inheritance
+Polymorphism
+The focus of object-oriented programming is to break a complex programming task into objects that contain fields (to store data) and methods (to perform operations on fields).
+
+Java Class
+Before you create objects in Java, you need to define a class. A class is a blueprint for the object.
+
+We can think of the class as a sketch (prototype) of a house. It contains all the details about the floors, doors, windows, etc. Based on these descriptions we build the house. House is the object.
+
+Since many houses can be made from the same description, we can create many objects from a class.
+
+How to define a class in Java?
+Here's how we can define a class in Java:
+
+class ClassName {
+   // variables
+   // methods
+}
+For example,
+
+class Lamp {
+
+  // instance variable
+  private boolean isOn;
+
+  // method
+  public void turnOn() {
+    isOn = true;
+  }
+
+  // method
+  public void turnOff() {
+  	isOn = false;
+  }
+}
+Here, we have created a class named Lamp.
+
+The class has one variable named isOn and two methods turnOn() and turnOff(). These variables and methods defined within a class are called members of the class.
+
+In the above example, we have used keywords private and public. These are known as access modifiers. To learn more, visit Java access modifiers.
+
+Java Objects
+An object is called an instance of a class. For example, suppose Animal is a class then Cat, Dog, Horse, and so on can be considered as objects of Animal class.
+
+Here is how we can create objects in Java:
+
+className object = new className();
+Here, we are using the constructor className() to create the object. Constructors have the same name as the class and are similar to methods. To learn more about Java constructor, visit Java Constructors.
+
+
+Let's see how we can create objects of the Lamp class.
+
+// l1 object
+Lamp l1 = new Lamp();
+// l2 object
+Lamp l2 = new Lamp();
+Here, we have created objects named l1 and l2 using the constructor of Lamp class (Lamp()).
+
+Objects are used to access members of a class. Let's create objects of the Lamp class
+
+How to access members?
+Objects are used to access members of the class. We can access members (call methods and access instance variables) by using the . operator. For example,
+
+class Lamp {
+    turnOn() {...}
+}
+
+// create object
+Lamp l1 = new Lamp();
+
+// access method turnOn()
+l1.turnOn();
+This statement calls the turnOn() method inside the Lamp class for the l1 object.
+
+We have mentioned the word method quite a few times. You will learn about Java methods in detail in the next chapter. Here's what you need to know for now:
+
+When you call the method using the above statement, all statements within the body of the turnOn() method is executed. Then, the control of the program jumps back to the statement following l1.turnOn();
+
+How methods work in Java?
+Working of Methods in Java
+Similarly, the instance variable can be accessed as:
+
+class Lamp {
+    boolean isOn;
+}
+
+// create object
+Lamp l1 = new Lamp();
+
+// access method turnOn()
+l1.isOn = true;
+Example: Java Class and Objects
+class Lamp {
+    boolean isOn;
+
+    void turnOn() {
+        // initialize variable with value true
+        isOn = true;
+        System.out.println("Light on? " + isOn);
+
+    }
+
+    void turnOff() {
+        // initialize variable with value false
+        isOn = false;
+        System.out.println("Light on? " + isOn);
+    }
+}
+
+
+class Main {
+    public static void main(String[] args) {
+  
+        // create objects l1 and l2
+        Lamp l1 = new Lamp();
+        Lamp l2 = new Lamp();
+  
+        // call methods turnOn() and turnOff()
+        l1.turnOn();
+        l2.turnOff();
+    }
+}
+Output:
+
+Light on? true
+Light on? false
+In the above program,
+
+We have created a class named Lamp.
+The class has an instance variable isOn and two methods turnOn() and turnOff().
+Inside the Main class, we have created two objects l1 and l2 of the Lamp class.
+We then use the l1 object to call turnOn() and the l2 object to call turnOff():
+ 
+l1.turnOn();
+l2.turnOff();
+The turnOn() method sets the isOn variable of l1 object to true. and prints the output. Similarly, the turnOff() method sets the isOn variable of the l2 object to false and prints the output.
+Note: The variables defined inside a class are known as instance variables for a reason. When an object is created, it is called an instance of the class.
+
+Each instance contains its own copy of the variables defined inside the class. Hence, known as instance variables. For example, the isOn variable is different for objects l1 and l2.
+
+In the coming tutorials, we will be exploring more about object-oriented programming in Java.
+
+Previous Tutorial:

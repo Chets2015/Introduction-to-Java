@@ -1,0 +1,345 @@
+Java Annotation Types
+In this tutorial, we will learn about different types of Java annotation with the help of examples.
+
+Java annotations are metadata (data about data) for our program source code. There are several predefined annotations provided by the Java SE. Moreover, we can also create custom annotations as per our needs.
+
+If you do not know what annotations are, visit the Java annotations tutorial.
+
+These annotations can be categorized as:
+
+1. Predefined annotations
+
+@Deprecated
+@Override
+@SuppressWarnings
+@SafeVarargs
+@FunctionalInterface
+2. Custom annotations
+
+3. Meta-annotations
+
+@Retention
+@Documented
+@Target
+@Inherited
+@Repeatable
+Predefined Annotation Types
+1. @Deprecated
+The@Deprecated annotation is a marker annotation that indicates the element (class, method, field, etc) is deprecated and has been replaced by a newer element.
+
+Its syntax is:
+
+@Deprecated
+accessModifier returnType deprecatedMethodName() { ... }
+When a program uses the element that has been declared deprecated, the compiler generates a warning.
+
+We use Javadoc @deprecated tag for documenting the deprecated element.
+
+/**
+ * @deprecated
+ * why it was deprecated
+ */
+@Deprecated
+accessModifier returnType deprecatedMethodName() { ... }
+Example 1: @Deprecated annotation example
+class Main {
+  /**
+   * @deprecated
+   * This method is deprecated and has been replaced by newMethod()
+   */
+  @Deprecated
+  public static void deprecatedMethod() { 
+    System.out.println("Deprecated method"); 
+  } 
+
+  public static void main(String args[]) {
+    deprecatedMethod();
+  }
+}
+Output
+
+Deprecated method
+2. @Override
+The @Override annotation specifies that a method of a subclass overrides the method of the superclass with the same method name, return type, and parameter list.
+
+It is not mandatory to use @Override when overriding a method. However, if we use it, the compiler gives an error if something is wrong (such as wrong parameter type) while overriding the method.
+
+Example 2: @Override annotation example
+class Animal {
+
+  // overridden method
+  public void display(){
+    System.out.println("I am an animal");
+  }
+}
+
+class Dog extends Animal {
+
+  // overriding method
+  @Override
+  public void display(){
+    System.out.println("I am a dog");
+  }
+
+  public void printMessage(){
+    display();
+  }
+}
+
+class Main {
+  public static void main(String[] args) {
+    Dog dog1 = new Dog();
+    dog1.printMessage();
+  }
+}
+Output
+
+I am a dog
+In this example, by making an object dog1 of Dog class, we can call its method printMessage() which then executes the display() statement.
+
+Since display() is defined in both the classes, the method of subclass Dog overrides the method of superclass Animal. Hence, the display() of the subclass is called.
+
+3. @SuppressWarnings
+As the name suggests, the @SuppressWarnings annotation instructs the compiler to suppress warnings that are generated while the program executes.
+
+We can specify the type of warnings to be suppressed. The warnings that can be suppressed are compiler-specific but there are two categories of warnings: deprecation and unchecked.
+
+To suppress a particular category of warning, we use:
+
+@SuppressWarnings("warningCategory")
+For example,
+
+@SuppressWarnings("deprecated")
+To suppress multiple categories of warnings, we use:
+
+@SuppressWarnings({"warningCategory1", "warningCategory2"})
+For example,
+
+@SuppressWarnings({"deprecated", "unchecked"})
+Category deprecated instructs the compiler to suppress warnings when we use a deprecated element.
+
+Category unchecked instructs the compiler to suppress warnings when we use raw types.
+
+And, undefined warnings are ignored. For example,
+
+@SuppressWarnings("someundefinedwarning")
+Example 3: @SuppressWarnings annotation example
+class Main {
+  @Deprecated
+  public static void deprecatedMethod() { 
+    System.out.println("Deprecated method"); 
+  } 
+  
+  @SuppressWarnings("deprecated")
+  public static void main(String args[]) {
+    Main depObj = new Main();
+    depObj. deprecatedMethod();
+  }
+}
+Output
+
+Deprecated method
+Here, deprecatedMethod() has been marked as deprecated and will give compiler warnings when used. By using the @SuppressWarnings("deprecated") annotation, we can avoid compiler warnings.
+
+4. @SafeVarargs
+The @SafeVarargs annotation asserts that the annotated method or constructor does not perform unsafe operations on its varargs (variable number of arguments).
+
+We can only use this annotation on methods or constructors that cannot be overridden. This is because the methods that override them might perform unsafe operations.
+
+Before Java 9, we could use this annotation only on final or static methods because they cannot be overridden. We can now use this annotation for private methods as well.
+
+Example 4: @SafeVarargs annotation example
+import java.util.*;
+
+class Main {
+
+  private void displayList(List<String>... lists) {
+    for (List<String> list : lists) {
+      System.out.println(list);
+    }
+  }
+
+  public static void main(String args[]) {
+    Main obj = new Main();
+
+    List<String> universityList = Arrays.asList("Tribhuvan University", "Kathmandu University");
+    obj.displayList(universityList);
+
+    List<String> programmingLanguages = Arrays.asList("Java", "C");
+    obj.displayList(universityList, programmingLanguages);
+  }
+}
+
+Warnings
+
+Type safety: Potential heap pollution via varargs parameter lists
+Type safety: A generic array of List<String> is created for a varargs 
+ parameter
+Output
+
+Note: Main.java uses unchecked or unsafe operations.
+[Tribhuvan University, Kathmandu University]
+[Tribhuvan University, Kathmandu University]
+[Java, C]
+Here, List ... lists specifies a variable-length argument of type List. This means that the method displayList() can have zero or more arguments.
+
+
+The above program compiles without errors but gives warnings when @SafeVarargs annotation isn't used.
+
+When we use @SafeVarargs annotation in the above example,
+
+@SafeVarargs
+ private void displayList(List<String>... lists) { ... }
+We get the same output but without any warnings. Unchecked warnings are also suppressed when we use this annotation.
+
+5. @FunctionalInterface
+Java 8 first introduced this @FunctionalInterface annotation. This annotation indicates that the type declaration on which it is used is a functional interface. A functional interface can have only one abstract method.
+
+Example 5: @FunctionalInterface annotation example
+@FunctionalInterface
+public interface MyFuncInterface{
+  public void firstMethod(); // this is an abstract method
+}
+If we add another abstract method, let's say
+
+@FunctionalInterface
+public interface MyFuncInterface{
+  public void firstMethod(); // this is an abstract method
+  public void secondMethod(); // this throws compile error
+}
+Now, when we run the program, we will get the following warning:
+
+Unexpected @FunctionalInterface annotation
+@FunctionalInterface ^ MyFuncInterface is not a functional interface
+multiple non-overriding abstract methods found in interface MyFuncInterface
+It is not mandatory to use @FunctionalInterface annotation. The compiler will consider any interface that meets the functional interface definition as a functional interface.
+
+We use this annotation to make sure that the functional interface has only one abstract method.
+
+However, it can have any number of default and static methods because they have an implementation.
+
+@FunctionalInterface
+public interface MyFuncInterface{
+  public void firstMethod(); // this is an abstract method
+  default void secondMethod() { ... } 
+  default void thirdMethod() { ... } 
+}
+Custom Annotations
+It is also possible to create our own custom annotations.
+
+Its syntax is:
+
+[Access Specifier] @interface<AnnotationName> {         
+  DataType <Method Name>() [default value];
+}
+Here is what you need to know about custom annotation:
+
+Annotations can be created by using @interface followed by the annotation name.
+The annotation can have elements that look like methods but they do not have an implementation.
+The default value is optional. The parameters cannot have a null value.
+The return type of the method can be primitive, enum, string, class name or array of these types.
+Example 6: Custom annotation example
+@interface MyCustomAnnotation {
+  String value() default "default value";
+}
+
+class Main {
+  @MyCustomAnnotation(value = "programiz")
+  public void method1() {
+    System.out.println("Test method 1");
+  }
+
+  public static void main(String[] args) throws Exception {
+    Main obj = new Main();
+    obj.method1();
+  }
+}
+
+Output
+
+Test method 1
+Meta Annotations
+Meta-annotations are annotations that are applied to other annotations.
+
+1. @Retention
+The @Retention annotation specifies the level up to which the annotation will be available.
+
+Its syntax is:
+
+@Retention(RetentionPolicy)
+There are 3 types of retention policies:
+
+RetentionPolicy.SOURCE - The annotation is available only at the source level and is ignored by the compiler.
+RetentionPolicy.CLASS - The annotation is available to the compiler at compile-time, but is ignored by the Java Virtual Machine (JVM).
+RetentionPolicy.RUNTIME - The annotation is available to the JVM.
+For example,
+
+@Retention(RetentionPolicy.RUNTIME)
+public @interface MyCustomAnnotation{ ... }
+2. @Documented
+By default, custom annotations are not included in the official Java documentation. To include our annotation in the Javadoc documentation, we use the @Documented annotation.
+
+For example,
+
+@Documented
+public @interface MyCustomAnnotation{ ... }
+3. @Target
+We can restrict an annotation to be applied to specific targets using the @Target annotation.
+
+Its syntax is:
+
+@Target(ElementType)
+The ElementType can have one of the following types:
+
+Element Type	Target
+ElementType.ANNOTATION_TYPE	Annotation type
+ElementType.CONSTRUCTOR 	Constructors
+ElementType.FIELD 	Fields
+ElementType.LOCAL_VARIABLE 	Local variables
+ElementType.METHOD 	Methods
+ElementType.PACKAGE 	Package
+ElementType.PARAMETER 	Parameter
+ElementType.TYPE 	Any element of class
+For example,
+
+@Target(ElementType.METHOD)
+public @interface MyCustomAnnotation{ ... }
+In this example, we have restricted the use of this annotation to methods only.
+
+Note: If the target type is not defined, the annotation can be used for any element.
+
+4. @Inherited
+By default, an annotation type cannot be inherited from a superclass. However, if we need to inherit an annotation from a superclass to a subclass, we use the @Inherited annotation.
+
+Its syntax is:
+
+@Inherited
+For example,
+
+@Inherited
+public @interface MyCustomAnnotation { ... }
+
+@MyCustomAnnotation
+public class ParentClass{ ... }
+
+public class ChildClass extends ParentClass { ... }
+5. @Repeatable
+An annotation that has been marked by @Repeatable can be applied multiple times to the same declaration.
+
+@Repeatable(Universities.class)
+public @interface University {
+  String name();
+}
+The value defined in the @Repeatable annotation is the container annotation. The container annotation has a variable value of array type of the above repeatable annotation. Here, Universities are the containing annotation type.
+
+public @interface Universities {
+  University[] value();
+}
+Now, the @University annotation can be used multiple times on the same declaration.
+
+@University(name = "TU")
+@University(name = "KU")
+private String uniName;
+If we need to retrieve the annotation data, we can use the Reflection API.
+
+To retrieve annotation values, we use getAnnotationsByType() or getAnnotations() method defined in the Reflection API.

@@ -1,0 +1,220 @@
+Java Assertions
+In this tutorial, we will learn about the Java assert statement (Java assertions) with the help of examples.
+
+Assertions in Java help to detect bugs by testing code we assume to be true.
+
+An assertion is made using the assert keyword.
+
+Its syntax is:
+
+assert condition;
+Here, condition is a boolean expression that we assume to be true when the program executes.
+
+Enabling Assertions
+By default, assertions are disabled and ignored at runtime.
+
+To enable assertions, we use:
+
+java -ea:arguments
+OR
+
+java -enableassertions:arguments
+When assertions are enabled and the condition is true, the program executes normally.
+
+But if the condition evaluates to false while assertions are enabled, JVM throws an AssertionError, and the program stops immediately.
+
+Example 1: Java assertion
+class Main {
+  public static void main(String args[]) {
+    String[] weekends = {"Friday", "Saturday", "Sunday"};
+    assert weekends.length == 2;
+    System.out.println("There are " + weekends.length + "  weekends in a week");
+  }
+}
+Output
+
+There are 3 weekends in a week
+We get the above output because this program has no compilation errors and by default, assertions are disabled.
+
+After enabling assertions, we get the following output:
+
+Exception in thread "main" java.lang.AssertionError
+Another form of assertion statement
+assert condition : expression;
+In this form of assertion statement, an expression is passed to the constructor of the AssertionError object. This expression has a value that is displayed as the error’s detail message if the condition is false.
+
+The detailed message is used to capture and transmit the information of the assertion failure to help in debugging the problem.
+
+Example 2: Java assertion with expression example
+class Main {
+  public static void main(String args[]) {
+    String[] weekends = {"Friday", "Saturday", "Sunday"};
+    assert weekends.length==2 : "There are only 2 weekends in a week";
+    System.out.println("There are " + weekends.length + "  weekends in a week");
+  }
+}
+
+Output
+
+Exception in thread "main" java.lang.AssertionError: There are only 2 weekends in a week
+As we see from the above example, the expression is passed to the constructor of the AssertionError object. If our assumption is false and assertions are enabled, an exception is thrown with an appropriate message.
+
+This message helps in diagnosing and fixing the error that caused the assertion to fail.
+
+Enabling assertion for specific classes and packages
+If we do not provide any arguments to the assertion command-line switches,
+
+java -ea
+This enables assertions in all classes except system classes.
+
+We can also enable assertion for specific classes and packages using arguments. The arguments that can be provided to these command-line switches are:
+
+Enable assertion in class names
+
+To enable assertion for all classes of our program Main,
+
+java -ea Main
+To enable only one class,
+
+java -ea:AnimalClass Main
+This enables assertion in only the AnimalClass in the Main program.
+
+
+Enable assertion in package names
+
+To enable assertions for package com.animal and its sub-packages only,
+
+java -ea:com.animal... Main
+Enable assertion in unnamed packages
+
+To enable assertion in unnamed packages (when we don’t use a package statement) in the current working directory.
+
+java -ea:... Main
+Enable assertion in system classes
+
+To enable assertion in system classes, we use a different command-line switch:
+
+java -esa:arguments 
+OR
+
+java -enablesystemassertions:arguments
+The arguments that can be provided to these switches are the same.
+
+Disabling Assertions
+To disable assertions, we use:
+
+java -da arguments 
+OR
+
+java -disableassertions arguments
+To disable assertion in system classes, we use:
+
+java -dsa:arguments
+OR
+
+java -disablesystemassertions:arguments
+The arguments that can be passed while disabling assertions are the same as while enabling them.
+
+Advantages of Assertion
+Quick and efficient for detecting and correcting bugs.
+Assertion checks are done only during development and testing. They are automatically removed in the production code at runtime so that it won’t slow the execution of the program.
+It helps remove boilerplate code and make code more readable.
+Refactors and optimizes code with increased confidence that it functions correctly.
+When to use Assertions
+1. Unreachable codes
+Unreachable codes are codes that do not execute when we try to run the program. Use assertions to make sure unreachable codes are actually unreachable.
+
+Let’s take an example.
+
+void unreachableCodeMethod() {
+  System.out.println("Reachable code");
+  return;
+  // Unreachable code
+  System.out.println("Unreachable code");
+  assert false;
+}
+Let’s take another example of a switch statement without a default case.
+
+switch (dayOfWeek) {
+  case "Sunday":
+    System.out.println("It’s Sunday!");
+    break;
+  case "Monday":
+    System.out.println("It’s Monday!");
+    break;
+  case "Tuesday":
+    System.out.println("It’s Tuesday!");
+    break;
+  case "Wednesday":
+    System.out.println("It’s Wednesday!");
+    break;
+  case "Thursday":
+    System.out.println("It’s Thursday!");
+    break;
+  case "Friday":
+    System.out.println("It’s Friday!");
+    break;
+  case "Saturday":
+    System.out.println("It’s Saturday!");
+    break;
+}
+The above switch statement indicates that the days of the week can be only one of the above 7 values. Having no default case means that the programmer believes that one of these cases will always be executed.
+
+However, there might be some cases that have not yet been considered where the assumption is actually false.
+
+This assumption should be checked using an assertion to make sure that the default switch case is not reached.
+
+default:
+    assert false: dayofWeek + " is invalid day";
+If dayOfWeek has a value other than the valid days, an AssertionError is thrown.
+
+2. Documenting assumptions
+To document their underlying assumptions, many programmers use comments. Let’s take an example.
+
+if (i % 2 == 0) {
+    ...
+} else { // We know (i % 2 == 1)
+    ...
+}
+Use assertions instead.
+
+Comments can get out-of-date and out-of-sync as the program grows. However, we will be forced to update the assert statements; otherwise, they might fail for valid conditions too.
+
+if (i % 2 == 0) {
+   ...
+} else {
+    assert i % 2 == 1 : i;
+    ...
+}
+When not to use Assertions
+1. Argument checking in public methods
+Arguments in public methods may be provided by the user.
+
+So, if an assertion is used to check these arguments, the conditions may fail and result in AssertionError.
+
+Instead of using assertions, let it result in the appropriate runtime exceptions and handle these exceptions.
+
+2. To evaluate expressions that affect the program operation
+Do not call methods or evaluate exceptions that can later affect the program operation in assertion conditions.
+
+Let us take an example of a list weekdays which contains the names of all the days in a week.
+
+
+ArrayList<String> weekdays = new ArrayList<>(Arrays.asList("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ));
+
+ArrayList<String> weekends= new ArrayList<>(Arrays.asList("Sunday", "Saturday" ));
+
+assert weekdays.removeAll(weekends);
+Here, we are trying to remove elements Saturday and Sunday from the ArrayList weekdays.
+
+If the assertion is enabled, the program works fine. However, if assertions are disabled, the elements from the list are not removed. This may result in program failure.
+
+Instead, assign the result to a variable and then use that variable for assertion.
+
+ArrayList<String> weekdays = new ArrayList<>(Arrays.asList("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ));
+
+ArrayList<String> weekends= new ArrayList<>(Arrays.asList("Sunday", "Saturday" ));
+
+boolean weekendsRemoved = weekdays.removeAll(weekends);
+assert weekendsRemoved;
+In this way, we can ensure that all the weekends are removed from the weekdays regardless of the assertion being enabled or disabled. As a result, it does not affect the program operation in the future.

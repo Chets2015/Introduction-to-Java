@@ -1,0 +1,247 @@
+Java Interface
+In this tutorial, we will learn about Java interfaces. We will learn how to implement interfaces and when to use them in detail with the help of examples.
+
+In Java, an interface defines a set of specifications that other classes must implement. For example,
+
+interface Polygon {
+   public void getArea();
+}
+Here, Polygon is an interface. We have used the interface keyword to declare an interface.
+
+The getArea() method is a specification defined in the Polygon interface. All classes that use this interface must implement the getArea() method.
+
+An interface can include abstract methods and constants. For example,
+
+interface Polygon {
+   public static final String color = "blue";
+   
+   public  void getArea();
+}
+In the above example, we have created an interface Polygon. It includes a constant variable color and an abstract method getArea().
+
+It is important to note that, all methods inside an interface are implicitly public and all fields are implicitly public static final. Hence, it's not necessary to specify the access specifier inside interfaces. For example, we can write the above code as
+
+interface Polygon {
+   String color = "blue";
+   
+    void getArea();
+}
+implements Keyword in Interface
+Like abstract classes, we cannot create objects of interfaces. However, we can implement interfaces in other classes. In Java, we use the implements keyword to implement interfaces. For example,
+
+interface Polygon {
+    void getArea(int length, int breadth);
+}
+
+class Rectangle implements Polygon {
+    public void getArea(int length, int breadth) {
+        System.out.println("The area of the rectangle is " + (length * breadth));
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Rectangle r1 = new Rectangle();
+        r1.getArea(5, 6);
+    }
+}
+Output
+
+The area of the rectangle is 30
+In the above program, we have created an interface Polygon. The Polygon interface has an abstract method getArea().
+
+This means that any class that implements Polygon must provide an implementation for the getArea() method.
+
+Notice that, the Rectangle class (which implements Polygon interface) has the method getArea() with implementation.
+
+Why use Interfaces?
+Now that we know what interfaces are, let’s learn about why interfaces are used in Java.
+
+Interfaces provide specifications that a class (which implements it) must follow.
+
+In our above example, we have used getArea() as a specification inside the interface Polygon. This is like setting a rule that, we should be able to get the area of every polygon. So any class that implements the Polygon interface must provide an implementation for the getArea() method.
+
+Similar to abstract classes, interfaces help us to achieve abstraction in Java. Here, we know getArea() calculates the area of polygons but the way area is calculated is different for different polygons. Hence, the implementation of getArea() is independent of one another.
+
+Interfaces are also used to achieve multiple inheritance in Java. If a subclass is inherited from two or more classes, it's multiple inheritance.
+
+In Java, multiple inheritance is not possible by extending classes. However, a class can implement multiple interfaces. This allows us to get the functionality of multiple inheritance in Java. For example,
+
+interface Line {
+   ...
+}
+interface Polygon {
+   ...
+}
+class Rectangle implements Line, Polygon{
+   ...
+}
+Here, Rectangle has to provide an implementation for all methods of both Line and Polygon.
+
+private and static Methods in Interface
+With the release of Java 8, interfaces now can include static methods.
+
+Similar to a class, we can access static methods of an interface using its references. For example,
+
+Polygon.staticMethod();
+Also, interfaces support private methods with the release of Java 9. Now you can use private methods and private static methods in interfaces.
+
+Since you cannot instantiate interfaces, private methods are used as helper methods that provide support to other methods in interfaces.
+
+default methods in Interfaces
+
+With the release of Java 8, methods with implementation (default methods) were introduced inside an interface. Before that, all the methods were abstract in Java.
+
+To declare default methods inside interfaces, we use the default keyword. For example,
+
+public default void getSides() {
+   // body of getSides()
+}
+Why default methods?
+Let's take a scenario to understand why default methods are introduced in Java.
+
+Suppose, we need to add a new method in an interface.
+
+We can add the method in our interface easily without implementation. However, that's not the end of the story. All our classes that implement that interface must provide an implementation for the method.
+
+If a large number of classes were implementing this interface, we need to track all these classes and make changes in them. This is not only tedious but error-prone as well.
+
+To resolve this, Java introduced default methods. Default methods are inherited like ordinary methods.
+
+Let’s take an example to have a better understanding of default methods.
+
+Example 2: Default Method
+interface  Polygon {
+   void getArea();
+   default void getSides() {
+      System.out.println("I can get sides of polygon.");
+   }
+}
+
+class Rectangle implements Polygon {
+   public void getArea() {
+      int length = 6;
+      int breadth = 5;
+      int area = length * breadth;
+      System.out.println("The area of the rectangle is "+area);
+   }
+
+   public void getSides() {
+      System.out.println("I have 4 sides.");
+   }
+}
+
+class Square implements Polygon {
+   public void getArea() {
+      int length = 5;
+      int area = length * length;
+      System.out.println("The area of the square is "+area);
+   }
+}
+
+class Main {
+   public static void main(String[] args) {
+      Rectangle r1 = new Rectangle();
+      r1.getArea();
+      r1.getSides();
+
+      Square s1 = new Square();
+      s1.getArea();
+   }
+}
+Output
+
+The area of the rectangle is 30
+I have 4 sides
+The area of the square is 25
+In the above example, we have created an interface Polygon. Polygon has a default method getSides() and an abstract method getArea().
+
+The class Rectangle then implements Polygon. Rectangle provides an implementation for the abstract method getArea() and overrides the default method getSides().
+
+We have created another class Square that also implements Polygon. Here, Square only provides an implementation for the abstract method getArea().
+
+Practical Example of Interface
+Let’s see a more practical example of Java Interface.
+
+// To use the sqrt function
+import java.lang.Math;
+
+interface  Polygon {
+   void getArea();
+  
+ // calculate the perimeter of a Polygon
+   default void getPerimeter(int... sides) {
+      int perimeter = 0;
+      for (int side: sides) {
+         perimeter += side;
+      }
+
+   System.out.println("Perimeter: " + perimeter);
+   }
+}
+
+class Triangle implements Polygon {
+   private int a, b, c;
+   private double s, area;
+
+// initializing sides of a triangle
+   Triangle(int a, int b, int c) {
+      this.a = a;
+      this.b = b;
+      this.c = c;
+      s = 0;
+   }
+
+// calculate the area of a triangle
+   public void getArea() {
+      s = (double) (a + b + c)/2;
+      area = Math.sqrt(s*(s-a)*(s-b)*(s-c));
+      System.out.println("Area: " + area);
+   }
+}
+
+class Main {
+   public static void main(String[] args) {
+      Triangle t1 = new Triangle(2, 3, 4);
+
+// calls the method of the Triangle class
+      t1.getArea();
+
+// calls the method of Polygon
+      t1.getPerimeter(2, 3, 4);
+   }
+}
+Output
+
+Area: 2.9047375096555625
+Perimeter: 9
+In the above program, we have created an interface Polygon. It includes a default method getPerimeter() and an abstract method getArea().
+
+We can calculate the perimeter of all polygons in the same manner so we implemented the body of getPerimeter() in Polygon. Now, all polygons that implement Polygon can use getPerimeter() to calculate perimeter.
+
+However, the area is calculated differently for different polygons as the rule for calculating area is different for different polygons. Hence, getArea() is included without implementation in Polygon. And, any class that implements the Polygon interface must provide an implementation of getArea().
+
+extends Keyword in Interface
+Similar to classes, interfaces can extend other interfaces. The extends keyword is used for extending interfaces. For example,
+
+interface Line {
+   //members of Line interface
+}
+
+interface Polygon extends Line {
+   //members of Polygon interface and Line interface
+}
+In the above example, the interface Polygon extends the Line interface. Now, if a class implements Polygon, it should provide implementations for all abstract classes of both Line and Polygon.
+
+Note that an interface can extend multiple interfaces similar to a class implementing multiple interfaces. For example,
+
+interface A {
+   ...
+}
+interface B {
+   ... 
+}
+
+Interface C extends A, B {
+   ...
+}

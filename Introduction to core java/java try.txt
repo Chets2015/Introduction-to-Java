@@ -1,0 +1,153 @@
+Java try-with-resources
+In this tutorial, we will learn about the try-with-resources statement to close resources automatically.
+
+The try-with-resources statement automatically closes all the resources at the end of the statement. A resource is an object to be closed at the end of the program.
+
+Its syntax is:
+
+try (resource declaration) {
+  // use of the resource
+} catch (ExceptionType e1) {
+  // catch block
+}
+As seen from the above syntax, we declare the try-with-resources statement by,
+
+declaring and instantiating the resource within the try clause.
+specifying and handling all exceptions that might be thrown while closing the resource.
+Note: The try-with-resources statement closes all the resources that implement the AutoCloseable interface.
+
+Let us take an example that implements the try-with-resources statement.
+
+Example 1: try-with-resources
+import java.io.*;
+
+class Main {
+  public static void main(String[] args) {
+    String line;
+    try(BufferedReader br = new BufferedReader(new FileReader("test.txt"))) {
+      while ((line = br.readLine()) != null) {
+        System.out.println("Line =>"+line);
+      }
+    } catch (IOException e) {
+      System.out.println("IOException in try block =>" + e.getMessage());
+    }
+  }
+}
+
+Output if the test.txt file is not found.
+
+IOException in try-with-resources block =>test.txt (No such file or directory)
+Output if the test.txt file is found.
+
+Entering try-with-resources block
+Line =>test line
+In this example, we use an instance of BufferedReader to read data from the test.txt file.
+
+Declaring and instantiating the BufferedReader inside the try-with-resources statement ensures that its instance is closed regardless of whether the try statement completes normally or throws an exception.
+
+If an exception occurs, it can be handled using the exception handling blocks or the throws keyword.
+
+Suppressed Exceptions
+In the above example, exceptions can be thrown from the try-with-resources statement when:
+
+The file test.txt is not found.
+Closing the BufferedReader object.
+An exception can also be thrown from the try block as a file read can fail for many reasons at any time.
+
+If exceptions are thrown from both the try block and the try-with-resources statement, exception from the try block is thrown and exception from the try-with-resources statement is suppressed.
+
+Retrieving Suppressed Exceptions
+In Java 7 and later, the suppressed exceptions can be retrieved by calling the Throwable.getSuppressed() method from the exception thrown by the try block.
+
+This method returns an array of all suppressed exceptions. We get the suppressed exceptions in the catch block.
+
+catch(IOException e) {
+  System.out.println("Thrown exception=>" + e.getMessage());
+  Throwable[] suppressedExceptions = e.getSuppressed();
+  for (int i=0; i<suppressedExceptions.length; i++) {
+    System.out.println("Suppressed exception=>" + suppressedExceptions[i]);
+  }
+}
+Advantages of using try-with-resources
+
+Here are the advantages of using try-with-resources:
+
+1. finally block not required to close the resource
+Before Java 7 introduced this feature, we had to use the finally block to ensure that the resource is closed to avoid resource leaks.
+
+Here's a program that is similar to Example 1. However, in this program, we have used finally block to close resources.
+
+Example 2: Close resource using finally block
+import java.io.*;
+
+class Main {
+  public static void main(String[] args) {
+    BufferedReader br = null;
+    String line;
+
+    try {
+      System.out.println("Entering try block");
+      br = new BufferedReader(new FileReader("test.txt"));
+      while ((line = br.readLine()) != null) {
+        System.out.println("Line =>"+line);
+      }
+    } catch (IOException e) {
+      System.out.println("IOException in try block =>" + e.getMessage());
+    } finally {
+      System.out.println("Entering finally block");
+      try {
+        if (br != null) {
+          br.close();
+        }
+      } catch (IOException e) {
+        System.out.println("IOException in finally block =>"+e.getMessage());
+      }
+
+    }
+  }
+}
+
+Output
+
+Entering try block
+Line =>line from test.txt file
+Entering finally block 
+As we can see from the above example, the use of finally block to clean up resources makes the code more complex.
+
+Notice the try...catch block in the finally block as well? This is because an IOException can also occur while closing the BufferedReader instance inside this finally block so it is also caught and handled.
+
+The try-with-resources statement does automatic resource management. We need not explicitly close the resources as JVM automatically closes them. This makes the code more readable and easier to write.
+
+2. try-with-resources with multiple resources
+We can declare more than one resource in the try-with-resources statement by separating them with a semicolon ;
+
+Example 3: try with multiple resources
+import java.io.*;
+import java.util.*;
+class Main {
+  public static void main(String[] args) throws IOException{
+    try (Scanner scanner = new Scanner(new File("testRead.txt")); 
+      PrintWriter writer = new PrintWriter(new File("testWrite.txt"))) {
+      while (scanner.hasNext()) {
+        writer.print(scanner.nextLine());
+      }
+    }
+  }
+}
+If this program executes without generating any exceptions, Scanner object reads a line from the testRead.txt file and writes it in a new testWrite.txt file.
+
+When multiple declarations are made, the try-with-resources statement closes these resources in reverse order. In this example, the PrintWriter object is closed first and then the Scanner object is closed.
+
+Java 9 try-with-resources enhancement
+In Java 7, there is a restriction to the try-with-resources statement. The resource needs to be declared locally within its block.
+
+try (Scanner scanner = new Scanner(new File("testRead.txt"))) {
+  // code
+}
+If we declared the resource outside the block in Java 7, it would have generated an error message.
+
+Scanner scanner = new Scanner(new File("testRead.txt"));
+try (scanner) {
+  // code
+}
+To deal with this error, Java 9 improved the try-with-resources statement so that the reference of the resource can be used even if it is not declared locally. The above code will now execute without any compilation error.

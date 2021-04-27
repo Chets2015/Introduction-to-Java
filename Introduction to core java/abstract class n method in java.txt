@@ -1,0 +1,184 @@
+java Abstract Class and Abstract Methods
+In this tutorial, we will learn about abstraction in Java. We will learn about Java abstract classes and methods and how to use them in our program.
+
+Java Abstract Class
+An abstract class is a class that cannot be instantiated (we cannot create objects of an abstract class). In Java, we use the abstract keyword to declare an abstract class.
+
+abstract class Animal {
+   //attributes and methods      
+}
+If we try to create objects of an abstract class, we will get a compilation error. For example,
+
+Animal a1 = new Animal()
+It will generate a compilation error:
+
+ Animal is abstract; cannot be instantiated
+Though abstract classes cannot be instantiated, we can create subclasses from it. We can create objects of subclasses to access members of the abstract class.
+
+Before we learn about it in detail, we need to understand abstract methods.
+
+Java Abstract Method
+We use the same keyword abstract to create abstract methods. An abstract method is declared without an implementation. For example,
+
+abstract void makeSound();
+Here, makeSound() is an abstract method. The body of makeSound() is replaced by ;.
+
+It's important to note that, only an abstract class can contain abstract methods. If we include abstract methods inside a class that is not abstract, we will get an error.
+
+An abstract class can contain both abstract and non-abstract methods. Here's an example.
+
+abstract class Animal {
+   public void displayInfo() {
+      System.out.println(“I am an animal.”);
+   }
+
+   abstract void makeSound();
+}
+In the above example, we have created an abstract class Animal. It contains an abstract method makeSound() and a non-abstract method displayInfo().
+
+Inheritance of Abstract Class
+An abstract class cannot be instantiated. To access the members of an abstract class, we must inherit it. For example
+
+Example 1: Inheritance of Abstract Class
+abstract class Animal {
+ public void displayInfo() {
+   System.out.println("I am an animal.");
+ }
+}
+
+class Dog extends Animal {
+
+}
+class Main {
+ public static void main(String[] args) {
+   Dog d1 = new Dog();
+   d1.displayInfo();
+ }
+}
+Output:
+
+I am an animal.
+In the above example, we have created an abstract class Animal. We cannot create objects of Animal. To access the displayInfo() of Animal, we have inherited a subclass Dog of Animal.
+
+We then used the d1 object of Dog to access the method displayInfo().
+
+Overriding of Abstract Methods
+In Java, it is mandatory to override abstract methods of the superclass in the subclass. It is because the subclass inherits abstract methods of the superclass.
+
+Since our subclass includes abstract methods, we need to override them.
+
+Note: If the subclass is also declared abstract, it's not mandatory to override abstract methods.
+
+Example 2: Overriding Abstract Method
+abstract class Animal {
+   abstract void makeSound();
+
+   public void eat() {
+      System.out.println("I can eat.");
+   }
+}
+
+class Dog extends Animal {
+
+   public void makeSound() {
+      System.out.println("Bark bark");
+   }
+}
+class Main {
+   public static void main(String[] args) {
+      Dog d1 = new Dog();
+      d1.makeSound();
+      d1.eat();
+   }
+}
+
+Output:
+
+Bark bark.
+I can eat.
+In the above example, we have created an abstract class Animal. The class contains an abstract method makeSound() and a non-abstract method eat().
+
+We have inherited a subclass Dog from the superclass Animal. Here, the subclass Dog overrides the abstract method displayInfo().
+
+We then created an object d1 of Dog. Using the object, we then called d1.displayInfo() and d1.eat() methods.
+
+Accesses Constructor of Abstract Classes
+Similar to non-abstract classes, we access the constructor of an abstract class from the subclass using the super keyword. For example,
+
+abstract class Animal {
+   Animal() {
+      ….
+   }
+}
+
+class Dog extends Animal {
+   Dog() {
+      super();
+      ...
+   }
+}
+Here, we have used the super() inside the constructor of Dog to access the constructor of the Animal.
+
+Note that the super should always be the first statement of the subclass constructor. Visit Java super keyword to learn more.
+
+Why Java Abstraction?
+Abstraction is an important concept of object-oriented programming. Abstraction only shows the needed information and all the unnecessary details are kept hidden. This allows us to manage complexity by omitting or hiding details with a simpler, higher-level idea.
+
+A practical example of abstraction can be motorbike brakes. We know what brake does. When we apply the brake, the motorbike will stop. However, the working of the brake is kept hidden from us.
+
+The major advantage of hiding the working of the brake is that now the manufacturer can implement brake differently for different motorbikes, however, what brake does will be the same.
+
+Let's take an example that helps us to better understand Java abstraction.
+
+Example 3: Java Abstraction
+abstract class Animal {
+   abstract void makeSound();
+
+}
+
+class Dog extends Animal {
+   public void makeSound() {
+      System.out.println("Bark bark.");
+   }
+}
+
+class Cat extends Animal {
+   public void makeSound() {
+      System.out.println("Meows ");
+   }
+}
+
+class Main {
+   public static void main(String[] args) {
+      Dog d1 = new Dog();
+      d1.makeSound();
+
+      Cat c1 = new Cat();
+      c1.makeSound();
+   }
+}
+Output:
+
+Bark bark
+Meows
+In the above example, we have created a superclass Animal. The superclass Animal has an abstract method makeSound().
+
+The makeSound() method cannot be implemented inside Animal. It is because every animal makes different sounds. So, all the subclasses of Animal would have different implementation of makeSound().
+
+We cannot implement makeSound() in Animal in such a way that it can be correct for all subclasses of Animal. So, the implementation of makeSound() in Animal is kept hidden.
+
+In the above example, Dog makes its own implementation of makeSound() and Cat makes its own implementation of makeSound().
+
+Key Points to Remember
+We use the abstract keyword to create abstract classes and methods.
+An abstract method doesn't have any implementation (method body).
+A class containing abstract methods should also be abstract.
+We cannot create objects of an abstract class.
+To implement features of an abstract class, we inherit subclasses from it and create objects of the subclass.
+A subclass must override all abstract methods of an abstract class. However, if the subclass is declared abstract, it's not mandatory to override abstract methods.
+We can access the static attributes and methods of an abstract class using the reference of the abstract class. For example,
+Animal.staticMethod();
+Java Interface
+In Java, an interface is similar to an abstract class. However, interfaces do not have any non-abstract methods. We will learn more about interfaces in the next tutorial.
+
+Previous Tutorial:

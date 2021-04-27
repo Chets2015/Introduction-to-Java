@@ -1,0 +1,148 @@
+Java Nested Static Class
+In this tutorial, you will learn about nested static class with the help of examples. You will also learn about how static classes differs from inner classes.
+
+As learned in previous tutorials, we can have a class inside another class in Java. Such classes are known as nested classes. In Java, nested classes are of two types:
+
+Nested non-static class (Inner class)
+Nested static class.
+We have already discussed inner classes in the previous tutorial. Visit Java Nested Class if you want to learn about inner classes.
+
+In this tutorial, we will learn about nested static classes.
+
+Java Nested Static Class
+We use the keyword static to make our nested class static.
+
+Note: In Java, only nested classes are allowed to be static.
+
+Like regular classes, static nested classes can include both static and non-static fields and methods. For example,
+
+Class Animal {
+   static class Mammal {
+      // static and non-static members of Mammal
+   }
+   // members of Animal
+} 
+Static nested classes are associated with the outer class.
+
+To access the static nested class, we don’t need objects of the outer class.
+
+Example: Static Nested Class
+class Animal {
+
+// inner class
+   class Reptile {
+      public void displayInfo() {
+        System.out.println("I am a reptile.");
+      }
+   }
+
+// static class
+   static class Mammal {
+      public void displayInfo() {
+        System.out.println("I am a mammal.");
+      }
+   }
+}
+
+class Main {
+   public static void main(String[] args) {
+      // object creation of the outer class
+      Animal animal = new Animal();
+
+      // object creation of the non-static class
+      Animal.Reptile reptile = animal.new Reptile();
+      reptile.displayInfo();
+
+      // object creation of the static nested class
+      Animal.Mammal mammal = new Animal.Mammal();
+      mammal.displayInfo();
+
+   }
+}
+Output
+
+I am a reptile.
+I am a mammal.
+In the above program, we have two nested class Mammal and Reptile inside a class Animal.
+
+To create an object of the non-static class Reptile, we have used
+
+Animal.Reptile reptile = animal.new Reptile()
+To create an object of the static class Mammal, we have used
+
+Animal.Mammal mammal = new Animal.Mammal()
+Accessing Members of Outer Class
+
+In Java, static nested classes are associated with the outer class. This is why static nested classes can only access the class members (static fields and methods) of the outer class.
+
+Let’s see what will happen if we try to access non-static fields and methods of the outer class.
+
+Example: Accessing Non-static members
+class Animal {
+  static class Mammal {
+   public void displayInfo() {
+     System.out.println("I am a mammal.");
+   }
+ }
+
+ class Reptile {
+   public void displayInfo() {
+     System.out.println("I am a reptile.");
+   }
+ }
+
+ public void eat() {
+   System.out.println("I eat food.");
+ }
+}
+
+class Main {
+ public static void main(String[] args) {
+   Animal animal = new Animal();
+   Animal.Reptile reptile = animal.new Reptile();
+   reptile.displayInfo();
+
+   Animal.Mammal mammal = new Animal.Mammal();
+   mammal.displayInfo();
+   mammal.eat();
+ }
+}
+Output
+
+Main.java:28: error: cannot find symbol
+    mammal.eat();
+          ^
+  symbol:   method eat()
+  location: variable mammal of type Mammal
+1 error
+compiler exit status 1
+In the above example, we have created a non-static method eat() inside the class Animal.
+
+Now, if we try to access eat() using the object mammal, the compiler shows an error.
+
+It is because mammal is an object of a static class and we cannot access non-static methods from static classes.
+
+Static Top-level Class
+As mentioned above, only nested classes can be static. We cannot have static top-level classes.
+
+Let’s see what will happen if we try to make a top-level class static.
+
+static class Animal {
+ public static void displayInfo() {
+   System.out.println("I am an animal");
+ }
+}
+
+class Main {
+ public static void main(String[] args) {
+   Animal.displayInfo();
+ }
+}
+Output
+
+Main.java:1: error: modifier static not allowed here
+static class Animal {
+       ^
+1 error
+compiler exit status 1
+In the above example, we have tried to create a static class Animal. Since Java doesn’t allow static top-level class, we will get an error.

@@ -1,0 +1,273 @@
+Java Methods
+In this tutorial, you will learn about Java methods, how to define methods, and how to use methods in Java programs with the help of examples.
+
+What is a method?
+In mathematics, we might have studied about functions. For example, f(x) = x2 is a function that returns a squared value of x.
+
+If x = 2, then f(2) = 4
+If x = 3, f(3) = 9
+and so on.
+Similarly, in computer programming, a function is a block of code that performs a specific task.
+
+In object-oriented programming, the method is a jargon used for function. Methods are bound to a class and they define the behavior of a class.
+
+Before we learn about methods, make sure to know about Java Class and Objects.
+
+Types of Java methods
+Depending on whether a method is defined by the user, or available in the standard library, there are two types of methods in Java:
+
+Standard Library Methods
+User-defined Methods
+Standard Library Methods
+The standard library methods are built-in methods in Java that are readily available for use. These standard libraries come along with the Java Class Library (JCL) in a Java archive (*.jar) file with JVM and JRE.
+
+For example,
+
+print() is a method of java.io.PrintSteam. The print("...") method prints the string inside quotation marks.
+sqrt() is a method of Math class. It returns the square root of a number.
+Here's a working example:
+
+public class Main {
+    public static void main(String[] args) {
+    
+        // using the sqrt() method
+        System.out.print("Square root of 4 is: " + Math.sqrt(4));
+    }
+}
+Output:
+
+Square root of 4 is: 2.0
+User-defined Method
+We can also create methods of our own choice to perform some task. Such methods are called user-defined methods.
+
+How to create a user-defined method?
+Here is how we can create a method in Java:
+
+public static void myMethod() {
+    System.out.println("My Function called");
+}
+Here, we have created a method named myMethod(). We can see that we have used the public, static and void before the method name.
+
+public - access modifier. It means the method can be accessed from anywhere. To learn more, visit Java access modifier
+static - It means that the method can be accessed without any objects. To learn more, visit the Java static Keyword.
+void - It means that the method does not return any value. We will learn more about this later in this tutorial.
+This is a simple example of how we can create a method. However, the complete syntax of a method definition in Java is:
+
+modifier static returnType nameOfMethod (parameters) {
+    // method body
+}
+Here,
+
+modifier - It defines access types whether the method is public, private and so on.
+static - If we use the static keyword, it can be accessed without creating objects.
+
+For example, the sqrt() method of standard Math class is static. Hence, we can directly call Math.sqrt() without creating an instance of Math class.
+returnType - It specifies what type of value a method returns For example if a method has int return type then it returns an integer value.
+
+A method can return native data types (int, float, double, etc), native objects (String, Map, List, etc), or any other built-in and user-defined objects.
+
+If the method does not return a value, its return type is void.
+nameOfMethod - It is an identifier that is used to refer to the particular method in a program.
+
+We can give any name to a method. However, it is more conventional to name it after the tasks it performs. For example, calculateArea(), display(), and so on.
+parameters (arguments) - These are values passed to a method. We can pass any number of arguments to a method.
+method body - It includes the programming statements that are used to perform some tasks. The method body is enclosed inside the curly braces { }.
+How to call a Java Method?
+Now that we know how to define methods, we need to learn to use them. For that, we have to call the method. Here's how
+
+myMethod();
+This statement calls myMethod() method that was declared earlier.
+
+Working of the method call in Java
+Working of the method call in Java
+While executing the program code, it encounters myFunction(); in the code.
+The execution then branches to the myFunction() method and executes code inside the body of the method.
+After the execution of the method body, the program returns to the original state and executes the next statement after the method call.
+Example: Java Method
+Let's see how we can use methods in a Java program.
+
+class Main {
+
+    public static void main(String[] args) {
+        System.out.println("About to encounter a method.");
+
+        // method call
+        myMethod();
+
+        System.out.println("Method was executed successfully!");
+    }
+
+    // method definition
+    private static void myMethod(){
+        System.out.println("Printing from inside myMethod()!");
+    }
+}
+Output:
+
+About to encounter a method.
+Printing from inside myMethod().
+Method was executed successfully!
+In the above program, we have a method named myMethod(). The method doesn't accept any arguments. Also, the return type of the method is void (means doesn't return any value).
+
+Here, the method is static. Hence we have called the method without creating an object of the class.
+
+Let's see another example,
+
+class Main {
+
+    public static void main(String[] args) {
+
+        // create object of the Output class
+        Output obj = new Output();
+        System.out.println("About to encounter a method.");
+
+        // calling myMethod() of Output class
+        obj.myMethod();
+
+        System.out.println("Method was executed successfully!");
+    }
+}
+
+class Output {
+  
+    // public: this method can be called from outside the class
+    public void myMethod() {
+        System.out.println("Printing from inside myMethod().");
+    }
+}
+
+Output:
+
+About to encounter a method.
+Printing from inside myMethod().
+Method was executed successfully!
+In the above example, we have created a method named myMethod(). The method is inside a class named Output.
+
+Since the method is not static, it is called using the object obj of the class.
+
+obj.myMethod();
+Method Arguments and Return Value
+As discussed earlier, a Java method can have zero or more parameters. And, it may also return some value.
+
+Example: Return Value from Method
+Let's take an example of a method returning a value.
+
+class SquareMain {
+    public static void main(String[] args) {
+        int result;
+
+        // call the method and store returned value
+        result = square(); 
+        System.out.println("Squared value of 10 is: " + result);
+    }
+
+    public static int square() {
+        // return statement
+        return 10 * 10;
+    }
+}
+Output:
+
+Squared value of 10 is: 100
+In the above program, we have created a method named square(). This method does not accept any arguments and returns value 10 *10.
+
+Here, we have mentioned the return type of the method as int. Hence, the method should always return an integer value.
+
+Representation of a method returning a value
+Representation of a method returning a value
+As we can see, the scope of this method is limited as it always returns the same value. Now, let's modify the above code snippet so that instead of always returning the squared value of 10, it returns the squared value of any integer passed to the method.
+
+Example: Method Accepting Arguments and Returning Value
+public class Main {
+   
+    public static void main(String[] args) {
+        int result, n;
+        
+        n = 3;
+        result = square(n);
+        System.out.println("Square of 3 is: " + result);
+        
+        n = 4;
+        result = square(n); 
+        System.out.println("Square of 4 is: " + result);
+    }
+
+    // method 
+    static int square(int i) {
+        return i * i;
+    }
+}
+Output:
+
+Squared value of 3 is: 9
+Squared value of 4 is: 16
+Here, the square() method accepts an argument i and returns the square of i. The returned value is stored in the variable result.
+
+Example showing passing argument to method and returning value
+Passing arguments and returning a value from a method in Java
+If we pass any other data type instead of int, the compiler will throw an error. It is because Java is a strongly typed language.
+
+The argument n passed to the getSquare() method during the method call is called an actual argument.
+
+result = getSquare(n);
+The argument i accepted by the method definition is known as a formal argument. The type of formal argument must be explicitly typed.
+
+public static int square(int i) {...}
+We can also pass more than one argument to the Java method by using commas. For example,
+
+public class Main {
+
+    // method definition
+    public static int getIntegerSum (int i, int j) {
+        return i + j;
+    }
+
+    // method definition
+    public static int multiplyInteger (int x, int y) {
+        return x * y;
+    }
+
+    public static void main(String[] args) {
+
+        // calling methods
+        System.out.println("10 + 20 = " + getIntegerSum(10, 20));
+        System.out.println("20 x 40 = " + multiplyInteger(20, 40));
+    }
+}
+Output:
+
+10 + 20 = 30
+20 x 40 = 800
+Note: The data type of actual and formal arguments should match, i.e., the data type of first actual argument should match the type of first formal argument. Similarly, the type of second actual argument must match the type of second formal argument and so on.
+
+What are the advantages of using methods?
+1. The main advantage is code reusability. We can write a method once, and use it multiple times. We do not have to rewrite the entire code each time. Think of it as, "write once, reuse multiple times". For example,
+
+public class Main {
+
+    // method defined
+    private static int getSquare(int x){
+        return x * x;
+    }
+
+    public static void main(String[] args) {
+        for (int i = 1; i <= 5; i++) {
+
+            // method call
+            int result = getSquare(i);
+            System.out.println("Square of " + i + " is: " + result);
+        }
+    }
+}
+Output:
+
+Square of 1 is: 1
+Square of 2 is: 4
+Square of 3 is: 9
+Square of 4 is: 16
+Square of 5 is: 25
+In the above program, we have created the method named getSquare() to calculate the square of a number. Here, the same method is used to calculate the square of numbers less than 6.
+
+Hence, we use the same method again and again.
+
+2. Methods make code more readable and easier to debug. For example, getSquare() method is so readable, that we can know what this method will be calculating the square of a number.

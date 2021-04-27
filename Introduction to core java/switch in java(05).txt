@@ -1,0 +1,154 @@
+ava switch Statement
+In this tutorial, you will learn to use the switch statement in Java to control the flow of your program’s execution
+
+In Java, we have used the if..else..if ladder to execute a block of code among multiple blocks. However, the syntax of if...else...if ladders are too long.
+
+Hence, we can use the switch statement as a substitute for long if...else...if ladders. The use of switch statements makes our code more readable.
+
+The syntax of the switch statement is:
+
+switch (variable/expression) {
+case value1:
+   // statements of case1
+   break;
+
+case value2:
+   // statements of case2
+   break;
+
+   .. .. ...
+   .. .. ...
+
+default:
+   // default statements
+}
+The switch statement evaluates the expression (mostly variable) and compares it with values (can be expressions) of each case label.
+
+Now, if the value matches a certain case label, then all the statements of the matching case label are executed.
+
+For example, if the variable/expression is equal to value2. In this case, all statements of that matching case (statements of case2) are executed.
+
+Notice, the use of break statements in each case. The break statement is used to terminate the execution of the switch statement.
+
+It is important because if break is not used all the statements after the matching case are executed in sequence until the end of the switch statement.
+
+Flowchart of switch Statement
+Flowchart of the Java switch statement
+Flow chart of the Java switch statement
+Note: The Java switch statement only works with:
+
+Java Primitive data types: byte, short, char, and int
+Java Enumerated types
+Java String Class
+Java Wrapper Classes: Character, Byte, Short, and Integer.
+Example 1: Java switch statement
+class Main {
+    public static void main(String[] args) {
+
+        int week = 4;
+        String day;
+
+        // switch statement to check day
+        switch (week) {
+            case 1:
+                day = "Sunday";
+                break;
+            case 2:
+                day = "Monday";
+                break;
+            case 3:
+                day = "Tuesday";
+                break;
+
+            // match the value of week
+            case 4:
+                day = "Wednesday";
+                break;
+            case 5:
+                day = "Thursday";
+                break;
+            case 6:
+                day = "Friday";
+                break;
+            case 7:
+                day = "Saturday";
+                break;
+            default:
+                day = "Invalid day";
+                break;
+        }
+        System.out.println("The day is " + day);
+    }
+}
+
+Output:
+
+The day is Wednesday
+In the above example, we have used the switch statement to find out the day of a week. Here, we have a variable week that holds an integer value. The value is compared to each case inside the switch block.
+
+Here the value of week is 4. Hence it matches the case 4. So the statement inside case 4 is executed.
+
+Example 2: Making Calculator using the switch statement
+The program below takes three inputs from the user: one operator and 2 numbers. Based on the operator provided by the user, it performs the calculation on the numbers. Then the result is displayed on the screen.
+
+Before you go through the program, make sure you know about Java Scanner to take input from the user.
+
+import java.util.Scanner;
+
+class Main {
+    public static void main(String[] args) {
+
+        char operator;
+        Double number1, number2, result;
+
+        // create an object of Scanner class
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter operator (either +, -, * or /): ");
+
+        // ask user to enter operator
+        operator = scanner.next().charAt(0);
+        System.out.print("Enter number1 and number2 respectively: ");
+
+        // ask user to enter numbers
+        number1 = scanner.nextDouble();
+        number2 = scanner.nextDouble();
+
+        switch (operator) {
+
+            // performs addition between numbers
+            case '+':
+                result = number1 + number2;
+                System.out.print(number1 + "+" + number2 + " = " + result);
+                break;
+
+            // performs subtraction between numbers
+            case '-':
+                result = number1 - number2;
+                System.out.print(number1 + "-" + number2 + " = " + result);
+                break;
+
+            // performs multiplication between numbers
+            case '*':
+                result = number1 * number2;
+                System.out.print(number1 + "*" + number2 + " = " + result);
+                break;
+
+            // performs division between numbers
+            case '/':
+                result = number1 / number2;
+                System.out.print(number1 + "/" + number2 + " = " + result);
+                break;
+
+            default:
+                System.out.println("Invalid operator!");
+                break;
+        }
+    }
+}
+Output:
+
+Enter operator (either +, -, * or /): *
+Enter number1 and number2 respectively: 1.4
+-5.3
+1.4*-5.3 = -7.419999999999999
+In the above example, we have used the switch statement to create a calculator. It performs the calculation based on the operator provided by the user.

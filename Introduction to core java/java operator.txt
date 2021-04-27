@@ -1,0 +1,336 @@
+Java Operators
+In this tutorial, you'll learn about different types of operators in Java, their syntax and how to use them with the help of examples.
+
+Operators are special symbols (characters) that carry out operations on operands (variables and values). For example, + is an operator that performs addition.
+
+In the previous tutorial, you learn about Java Variables. You learn to declare variables and assign values to variables. Now, you will learn to use operators to manipulate variables.
+
+Assignment Operator
+Assignment operators are used in Java to assign values to variables. For example,
+
+int age;
+age = 5;
+The assignment operator assigns the value on its right to the variable on its left. Here, 5 is assigned to the variable age using = operator.
+
+There are other assignment operators too. However, to keep things simple, we will learn other assignment operators later in this article.
+
+Example 1: Assignment Operator
+class AssignmentOperator {
+    public static void main(String[] args) {
+    	
+        int number1, number2;
+    	
+        // Assigning 5 to number1 
+        number1 = 5;
+        System.out.println(number1);
+    	    	
+        // Assigning value of variable number2 to number1
+        number2 = number1;
+        System.out.println(number2);
+    }
+}
+Output:
+
+5
+5
+Arithmetic Operators
+Arithmetic operators are used to perform mathematical operations like addition, subtraction, multiplication, etc.
+
+Operator	Meaning
++	Addition (also used for string concatenation)
+-	Subtraction Operator
+*	Multiplication Operator
+/	Division Operator
+%	Remainder Operator
+Example 2: Arithmetic Operator
+class ArithmeticOperator {
+    public static void main(String[] args) {
+    	
+        double number1 = 12.5, number2 = 3.5, result;
+    	
+        // Using addition operator
+        result = number1 + number2;
+        System.out.println("number1 + number2 = " + result);
+    	
+        // Using subtraction operator
+        result = number1 - number2;
+        System.out.println("number1 - number2 = " + result);
+    	
+        // Using multiplication operator
+        result = number1 * number2;
+        System.out.println("number1 * number2 = " + result);
+
+        // Using division operator
+        result = number1 / number2;
+        System.out.println("number1 / number2 = " + result);
+    	
+        // Using remainder operator
+        result = number1 % number2;
+        System.out.println("number1 % number2 = " + result);
+    }
+}
+Output:
+
+number1 + number2 = 16.0
+number1 - number2 = 9.0
+number1 * number2 = 43.75
+number1 / number2 = 3.5714285714285716
+number1 % number2 = 2.0
+In the above example, all operands used are variables. However, it's not necessary at all. Operands used in arithmetic operators can be literals as well. For example,
+
+result = number1 + 5.2;
+result = 2.3 + 4.5;
+number2 = number1 -2.9;
+The + operator can also be used to concatenate two or more strings.
+
+Example 3: Arithmetic Operator to Add String
+class ArithmeticOperator {
+    public static void main(String[] args) {
+    	
+        String start, middle, end, result;
+    	
+        start = "Talk is cheap. ";
+        middle = "Show me the code. ";
+        end = "- Linus Torvalds";
+    	
+        result = start + middle + end;
+        System.out.println(result);
+    }
+}
+Output:
+
+Talk is cheap. Show me the code. - Linus Torvalds
+Unary Operators
+The unary operator performs operations on only one operand.
+
+Operator	Meaning
++	Unary plus (not necessary to use since numbers are positive without using it)
+-	Unary minus: inverts the sign of an expression
+++	Increment operator: increments value by 1
+--	decrement operator: decrements value by 1
+!	Logical complement operator: inverts the value of a boolean
+Example 4: Unary Operator
+class UnaryOperator {
+    public static void main(String[] args) {
+    	
+        double number = 5.2, resultNumber;
+        boolean flag = false;
+    	
+        System.out.println("+number = " + +number);
+        // number is equal to 5.2 here.
+        
+        System.out.println("-number = " + -number);
+        // number is equal to 5.2 here.
+    	
+        // ++number is equivalent to number = number + 1
+        System.out.println("number = " + ++number);
+        // number is equal to 6.2 here.
+
+        // -- number is equivalent to number = number - 1
+        System.out.println("number = " + --number);
+        // number is equal to 5.2 here.
+
+        System.out.println("!flag = " + !flag);
+        // flag is still false.
+    }
+}
+Output:
+
++number = 5.2
+-number = -5.2
+number = 6.2
+number = 5.2
+!flag = true
+Increment and Decrement Operator
+You can also use ++ and -- operator as both prefix and postfix in Java. The ++ operator increases value by 1 and -- operator decreases the value by 1.
+
+int myInt = 5;
+++myInt   // myInt becomes 6
+myInt++   // myInt becomes 7
+--myInt   // myInt becomes 6
+myInt--   // myInt becomes 5
+Simple enough until now. However, there is a crucial difference while using increment and decrement operators as prefix and postfix. Consider this example,
+
+Example 5: Unary Operator
+class UnaryOperator {
+    public static void main(String[] args) {
+    	
+        double number = 5.2;
+
+        System.out.println(number++);
+        System.out.println(number);
+
+        System.out.println(++number);
+        System.out.println(number);
+    }
+}
+Output:
+
+5.2
+6.2
+7.2
+7.2
+Here, notice the line,
+
+System.out.println(number++);
+When this statement is executed, the original value is evaluated first. Then the number is increased. This is the reason you are getting 5.2 as an output.
+
+Now, when the line,
+
+System.out.println(number);
+will print the increased value. That is 6.2.
+
+However, the line,
+
+System.out.println(++number);
+will increase the number by 1 first and then the statement is executed. Hence the output is 7.2.
+
+Similar is the case for decrement -- operator.
+
+Equality and Relational Operators
+
+The equality and relational operators determine the relationship between the two operands. It checks if an operand is greater than, less than, equal to, not equal to and so on. Depending on the relationship, it is evaluated to either true or false.
+
+Operator	Description	Example
+==	equal to	5 == 3 is evaluated to false
+!=	not equal to	5 != 3 is evaluated to true
+>	greater than	5 > 3 is evaluated to true
+<	less than	5 < 3 is evaluated to false
+>=	greater than or equal to	5 >= 5 is evaluated to true
+<=	less than or equal to	5 <= 5 is evaluated to true
+Equality and relational operators are used in decision making and loops (which will be discussed later). For now, check this simple example.
+
+Example 6: Equality and Relational Operators
+class RelationalOperator {
+    public static void main(String[] args) {
+    	
+        int number1 = 5, number2 = 6;
+
+        if (number1 > number2) {
+            System.out.println("number1 is greater than number2.");
+        }
+        else {
+            System.out.println("number2 is greater than number1.");
+        }
+    }
+}
+Output:
+
+number2 is greater than number1.
+Here, we have used > operator to check if number1 is greater than number2 or not.
+
+Since number2 is greater than number1, the expression number1 > number2 is evaluated to false.
+
+Hence, the block of code inside else is executed and the block of code inside if is skipped.
+
+If you didn't understand the above code, don't worry. You will learn it in detail in Java if...else article.
+
+For now, just remember that the equality and relational operators compare two operands and is evaluated to either true or false.
+
+instanceof Operator
+In addition to relational operators, there is also a type comparison operator instanceof which compares an object to a specified type. For example,
+
+Example 7: instanceof Operator
+Here's an example of instanceof operator.
+
+class instanceofOperator {
+    public static void main(String[] args) {
+    	
+        String test = "asdf";
+        boolean result;
+    	
+        result = test instanceof String;
+        System.out.println("Is test an object of String? " + result);
+    }
+}
+Output:
+
+Is test an object of String? true
+Here, since the variable test is of String type. Hence, the instanceof operator returns true. To learn more, visit Java instanceof.
+
+Logical Operators
+The logical operators || (conditional-OR) and && (conditional-AND) operate on boolean expressions. Here's how they work.
+
+Operator	Description	Example
+||	conditional-OR: true if either of the boolean expression is true	false || true is evaluated to true
+&&	conditional-AND: true if all boolean expressions are true	false && true is evaluated to false
+Example 8: Logical Operators
+class LogicalOperator {
+    public static void main(String[] args) {
+    	
+        int number1 = 1, number2 = 2, number3 = 9;
+        boolean result;
+    	
+        // At least one expression needs to be true for the result to be true
+        result = (number1 > number2) || (number3 > number1);
+
+        // result will be true because (number3 > number1) is true
+        System.out.println(result);
+    			
+        // All expression must be true from result to be true	
+        result = (number1 > number2) && (number3 > number1);
+
+        // result will be false because (number1 > number2) is false
+        System.out.println(result);
+    }
+}
+Output:
+
+true
+false
+Note: Logical operators are used in decision making and looping.
+
+Ternary Operator
+The conditional operator or ternary operator ?: is shorthand for the if-then-else statement. The syntax of the conditional operator is:
+
+variable = Expression ? expression1 : expression2
+Here's how it works.
+
+If the Expression is true, expression1 is assigned to the variable.
+If the Expression is false, expression2 is assigned to the variable.
+Example 9: Ternary Operator
+class ConditionalOperator {
+    public static void main(String[] args) {
+    	
+        int februaryDays = 29;
+        String result;
+    	
+         result =  (februaryDays == 28) ? "Not a leap year" : "Leap year";
+         System.out.println(result);
+    }
+}
+Output:
+
+Leap year
+Here, we have used the ternary operator to check if the year is a leap year or not. To learn more, visit Java ternary operator.
+
+Bitwise and Bit Shift Operators
+To perform bitwise and bit shift operators in Java, these operators are used.
+
+Operator	Description
+~	Bitwise Complement
+<<	Left Shift
+>>	Right Shift
+>>>	Unsigned Right Shift
+&	Bitwise AND
+^	Bitwise exclusive OR
+|	Bitwise inclusive OR
+These operators are not commonly used. To learn more, visit Java bitwise and bit shift operators.
+
+More Assignment Operators
+We have only discussed one assignment operator = at the beginning of the article. Except for this operator, there are quite a few assignment operators that hels us to write cleaner code.
+
+Operator	Example	Equivalent to
++=	x += 5	x = x + 5
+-=	x -= 5	x = x - 5
+*=	x *= 5	x = x * 5
+/=	x /= 5	x = x / 5
+%=	x %= 5	x = x % 5
+<<=	x <<= 5	x = x << 5
+>>=	x >>= 5	x = x >> 5
+&=	x &= 5	x = x & 5
+^=	x ^= 5	x = x ^ 5
+|=	x |= 5	x = x | 5
+Now you know about Java operators, it's time to know about the order in which operators in an expression are evaluated when two operators share a common operand. To learn about that, visit Java Operator Precedence.
+
+Previous Tutorial:

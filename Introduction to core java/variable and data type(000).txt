@@ -1,0 +1,291 @@
+Java Variables and (Primitive) Data Types
+In this tutorial, you will learn about variables, how to create them, and different data types that Java programming language supports for creating variables.
+
+Java Variables
+A variable is a location in memory (storage area) to hold data.
+
+To indicate the storage area, each variable should be given a unique name (identifier). Learn more about Java identifiers.
+
+How to declare variables in Java?
+Here's an example to declare a variable in Java.
+
+int speedLimit = 80;
+Here, speedLimit is a variable of int data type and is assigned value 80. Meaning, the speedLimit variable can store integer values. You will learn about Java data types in detail later in the article.
+
+In the example, we have assigned value to the variable during declaration. However, it's not mandatory. You can declare variables without assigning the value, and later you can store the value as you wish. For example,
+
+int speedLimit;
+speedLimit = 80;
+The value of a variable can be changed in the program, hence the name 'variable'. For example,
+
+int speedLimit = 80;
+... .. ...
+speedLimit = 90; 
+Java is a statically-typed language. It means that all variables must be declared before they can be used.
+
+Also, you cannot change the data type of a variable in Java within the same scope. What is the variable scope? Don't worry about it for now. For now, just remember you cannot do something like this.
+
+int speedLimit = 80;
+... .. ...
+float speedLimit;
+To learn more, visit: Can I change declaration type for a variable in Java?
+
+Rules for Naming Variables in Java
+Java programming language has its own set of rules and conventions for naming variables. Here's what you need to know:
+
+Variables in Java are case-sensitive.
+A variable's name is a sequence of Unicode letters and digits. It can begin with a letter, $ or _. However, it's a convention to begin a variable name with a letter. Also, variable names cannot use whitespace in Java.
+Java variable naming convention
+Variable Naming Convention
+When creating variables, choose a name that makes sense. For example, score, number, level makes more sense than variable names such as s, n, and l.
+If you choose one-word variable names, use all lowercase letters. For example, it's better to use speed rather than SPEED, or sPEED.
+If you choose variable names having more than one word, use all lowercase letters for the first word and capitalize the first letter of each subsequent word. For example, speedLimit.
+There are 4 types of variables in Java programming language:
+
+Instance Variables (Non-Static Fields)
+Class Variables (Static Fields)
+Local Variables
+Parameters
+You will learn about in later chapters. If you are interested to learn more about it now, visit Java Variable Types.
+
+Java Primitive Data Types
+As mentioned above, Java is a statically-typed language. This means that all variables must be declared before they can be used.
+
+int speed;
+Here, speed is a variable, and the data type of the variable is int. The int data type determines that the speed variable can only contain integers.
+
+In simple terms, a variable's data type determines the values a variable can store. There are 8 data types predefined in Java programming language, known as primitive data types.
+
+In addition to primitive data types, there are also referenced data types in Java (you will learn about it in later chapters).
+
+8 Primitive Data Types
+boolean
+The boolean data type has two possible values, either true or false.
+Default value: false.
+They are usually used for true/false conditions. For example,
+class BooleanExample {
+    public static void main(String[] args) {
+    	
+        boolean flag = true;
+        System.out.println(flag);
+    }
+}
+Output:
+
+true
+byte
+The byte data type can have values from -128 to 127 (8-bit signed two's complement integer).
+It's used instead of int or other integer data types to save memory if it's certain that the value of a variable will be within [-128, 127].
+Default value: 0
+Example:
+class ByteExample {
+    public static void main(String[] args) {
+
+        byte range;
+        range = 124;
+        System.out.println(range);
+    }
+}
+Output:
+
+124
+short
+The short data type can have values from -32768 to 32767 (16-bit signed two's complement integer).
+It's used instead of other integer data types to save memory if it's certain that the value of the variable will be within [-32768, 32767].
+Default value: 0
+Example:
+class ShortExample {
+    public static void main(String[] args) {
+    	
+        short temperature;
+        temperature = -200;
+        System.out.println(temperature);
+    }
+}
+When you run the program, the output will be:
+
+-200
+int
+The int data type can have values from -231 to 231-1 (32-bit signed two's complement integer).
+If you are using Java 8 or later, you can use unsigned 32-bit integer with a minimum value of 0 and a maximum value of 232-1. If you are interested in learning more about it, visit: How to use the unsigned integer in java 8?
+Default value: 0
+Example:
+class IntExample {
+    public static void main(String[] args) {
+    	
+        int range = -4250000;
+        System.out.println(range);
+    }
+}
+Output:
+
+-4250000
+long
+The long data type can have values from -263 to 263-1 (64-bit signed two's complement integer).
+If you are using Java 8 or later, you can use unsigned 64-bit integer with a minimum value of 0 and a maximum value of 264-1.
+Default value: 0
+Example:
+class LongExample {
+    public static void main(String[] args) {
+    	
+        long range = -42332200000L;
+        System.out.println(range);
+    }
+}
+
+Output:
+
+-42332200000
+Notice, the use of L at the end of -42332200000. This represents that it's an integral literal of the long type. You will learn about integral literals later in this article.
+
+double
+The double data type is a double-precision 64-bit floating-point.
+It should never be used for precise values such as currency.
+Default value: 0.0 (0.0d)
+Example:
+class DoubleExample {
+    public static void main(String[] args) {
+    	
+        double number = -42.3;
+        System.out.println(number);
+    }
+}
+Output:
+
+-42.3
+float
+The float data type is a single-precision 32-bit floating-point. Learn more about single-precision and double-precision floating-point if you are interested.
+It should never be used for precise values such as currency.
+Default value: 0.0 (0.0f)
+Example:
+class FloatExample {
+    public static void main(String[] args) {
+    	
+        float number = -42.3f;
+        System.out.println(number);
+    }
+}
+Output:
+
+-42.3
+Notice that, we have used -42.3f instead of -42.3in the above program. It's because -42.3 is a double literal. To tell the compiler to treat -42.3 as float rather than double, you need to use f or F.
+
+char
+It's a 16-bit Unicode character.
+The minimum value of the char data type is '\u0000' (0). The maximum value of the char data type is '\uffff'.
+Default value: '\u0000'
+Example:
+class CharExample {
+    public static void main(String[] args) {
+    	
+        char letter = '\u0051';
+        System.out.println(letter);
+    }
+}
+Output:
+
+Q
+You get the output Q because the Unicode value of Q is '\u0051'.
+
+Here is another example:
+
+class CharExample {
+    public static void main(String[] args) {
+    	
+        char letter1 = '9';
+        System.out.println(letter1);
+    	
+        char letter2 = 65;
+        System.out.println(letter2);
+
+    }
+}
+Output:
+
+9
+A
+When you print letter1, you will get 9 because letter1 is assigned character '9'.
+
+When you print letter2, you get A because the ASCII value of 'A' is 65. It's because java compiler treats the character as an integral type. To learn more about ASCII, visit What is ASCII Code?.
+
+String
+Java also provides support for character strings via java.lang.String class. Here's how you can create a String object in Java:
+
+myString = "Programming is awesome";
+Java String is an important topic which you will learn in detail in later chapters. However, if you are not a newbie in programming and want to learn it now, visit Java String.
+
+Java literals
+To understand literals, let's take an example to assign value to a variable.
+
+boolean flag = false;
+Here,
+
+boolean - is a data type.
+flag - is variable
+false - is literal.
+A Literal is the source code representation of a fixed value.
+
+Values like 1.5, 4, true, '\u0050' that appear directly in a program without requiring computation are literals.
+
+In the above example, flag is a variable. Since it's a boolean type variable, it may store either false or true. For the compiler to understand it, it requires computation. However, literals like -5, 'a', true represents fixed value.
+
+Integer Literals
+Integer literals are used to initialize variables of integer data types byte, short, int and long.
+If an integer literal ends with l or L, it's of type long. Tip: it is better to use L instead of l.
+// Error! literal 42332200000 of type int is out of range
+int myVariable1 = 42332200000;// 42332200000L is of type long, and it's not out of range
+long myVariable2 = 42332200000L;
+Integer literals can be expressed in decimal, hexadecimal and binary number systems.
+The numbers starting with prefix 0x represents hexadecimal. Similarly, numbers starting with prefix 0b represents binary.
+// decimal
+int decNumber = 34;
+int hexNumber = 0x2F; // 0x represents hexadecimal
+int binNumber = 0b10010; // 0b represents binary
+Floating-point Literals
+Floating-point literals are used to initialize variables of data type float and double.
+If a floating-point literal ends with f or F, it's of type float. Otherwise, it's of type double. A double type can optionally end with D or d. However, it's not necessary.
+They can also be expressed in scientific notation using E or e.
+
+class DoubleExample {
+    public static void main(String[] args) {
+    	
+        double myDouble = 3.4;
+        float myFloat = 3.4F;
+    	
+        // 3.445*10^2
+        double myDoubleScientific = 3.445e2;
+
+        System.out.println(myDouble);
+        System.out.println(myFloat);
+        System.out.println(myDoubleScientific);
+    }
+}
+Output:
+
+3.4
+3.4
+344.5
+Character and String Literals
+They contain Unicode (UTF-16) characters.
+For char literals, single quotations are used. For example, 'a', '\u0111' etc.
+For String literals, double quotation is used. For example, "programming", "Java 8"
+Java also supports a few special escape sequences. For example, \b (backspace), \t (tab), \n (line feed), \f (form feed), \r (carriage return), \" (double quote), \' (single quote), and \\ (backslash).
+class DoubleExample {
+    public static void main(String[] args) {
+    	
+        char myChar = 'g';
+        char newLine = '\n';
+        String myString = "Java 8";
+    	
+        System.out.println(myChar);
+        System.out.println(newLine);
+        System.out.println(myString);
+    }
+}
+Output:
+
+g
+
+
+Java 8
+Previous Tutorial:

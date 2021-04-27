@@ -1,0 +1,253 @@
+Java String
+In this tutorial, we will learn about Java String, how to create it and its various methods with the help of examples.
+
+In Java, a string is a sequence of characters. For example, "hello" is a string containing a sequence of characters 'h', 'e', 'l', 'l', and 'o'.
+
+Unlike other programming languages, strings in Java are not primitive types (like int, char, etc). Instead, all strings are objects of a predefined class named String. For example,
+
+// create a string
+String type = "java programming";
+Here, we have created a string named type. Here, we have initialized the string with "java programming". In Java, we use double quotes to represent a string.
+
+The string is an instance of the String class.
+
+Note: All string variables are instances of the String class.
+
+Java String Methods
+Java String provides various methods that allow us to perform different string operations. Here are some of the commonly used string methods.
+
+Methods	Description
+concat()	joins the two strings together
+equals()	compares the value of two strings
+charAt()	returns the character present in the specified location
+getBytes()	converts the string to an array of bytes
+indexOf()	returns the position of the specified character in the string
+length()	returns the size of the specified string
+replace()	replaces the specified old character with the specified new character
+substring()	returns the substring of the string
+split()	breaks the string into an array of strings
+toLowerCase()	converts the string to lowercase
+toUpperCase()	converts the string to uppercase
+valueOf()	returns the string representation of the specified data
+Let's take a few examples.
+
+Example 1: Java find string's length
+class Main {
+  public static void main(String[] args) {
+
+    // create a string
+    String greet = "Hello! World";
+    System.out.println("The string is: " + greet);
+
+    //checks the string length
+    System.out.println("The length of the string: " + greet.length());
+  }
+}
+Output
+
+The string is: Hello! World
+The length of the string: 12
+In the above example, we have created a string named greet. Here we have used the length() method to get the size of the string.
+
+Example 2: Java join two strings using concat()
+class Main {
+  public static void main(String[] args) {
+
+    // create string
+    String greet = "Hello! ";
+    System.out.println("First String: " + greet);
+
+    String name = "World";
+    System.out.println("Second String: " + name);
+
+    // join two strings
+    String joinedString = greet.concat(name);
+    System.out.println("Joined String: " + joinedString);
+  }
+}
+Output
+
+First String: Hello!
+Second String: World
+Joined String: Hello! World
+In the above example, we have created 2 strings named greet and name.
+
+Here, we have used the concat() method to join the strings. Hence, we get a new string named joinedString.
+
+In Java, we can also join two strings using the + operator.
+
+Example 3: Java join strings using + operator
+class Main {
+  public static void main(String[] args) {
+
+    // create string
+    String greet = "Hello! ";
+    System.out.println("First String: " + greet);
+
+    String name = "World";
+    System.out.println("Second String: " + name);
+
+    // join two strings
+    String joinedString = greet + name;
+    System.out.println("Joined String: " + joinedString);
+  }
+}
+Output
+
+First String: Hello!
+Second String: World
+Joined String: Hello! World
+Here, we have used the + operator to join the two strings.
+
+Example 4: Java compare two strings
+class Main {
+  public static void main(String[] args) {
+
+    // create strings
+    String first = "java programming";
+    String second = "java programming";
+    String third = "python programming";
+
+    // compare first and second strings
+    boolean result1 = first.equals(second);
+    System.out.println("Strings first and second are equal: " + result1);
+
+    //compare first and third strings
+    boolean result2 = first.equals(third);
+    System.out.println("Strings first and third are equal: " + result2);
+  }
+}
+Output
+
+Strings first and second are equal: true
+Strings first and third are equal: false
+In the above example, we have used the equals() method to compare the value of two strings.
+
+The method returns true if both strings are the same otherwise it returns false.
+
+Note: We can also use the == operator and compareTo() method to make a comparison between 2 strings.
+
+Example 5: Java get characters from a string
+class Main {
+  public static void main(String[] args) {
+
+    // create string using the string literal
+    String greet = "Hello! World";
+    System.out.println("The string is: " + greet);
+
+    // returns the character at 3
+    System.out.println("The character at 3: " + greet.charAt(3));
+
+    // returns the character at 7
+    System.out.println("The character at 7: " + greet.charAt(7));
+  }
+}
+Output
+
+The string is: Hello! World
+The character at 3: l
+The character at 7: W
+In the above example, we have used the charAt() method to access the character from the specified position.
+
+Example 6: Java Strings other methods
+class Main {
+  public static void main(String[] args) {
+
+    // create string using the new keyword
+    String example = new String("Hello! World");
+
+    // returns the substring World
+    System.out.println("Using the subString(): " + example.substring(7));
+
+    // converts the string to lowercase
+    System.out.println("Using the toLowerCase(): " + example.toLowerCase());
+
+    // converts the string to uppercase
+    System.out.println("Using the toUpperCase(): " + example.toUpperCase());
+
+    // replaces the character '!' with 'o'
+    System.out.println("Using the replace(): " + example.replace('!', 'o'));
+  }
+}
+Output
+
+Using the subString(): World
+Using the toLowerCase(): hello! world
+Using the toUpperCase(): HELLO! WORLD
+Using the replace(): Helloo World
+In the above example, we have created a string named example using the new keyword.
+
+Here,
+
+the substring() method returns the string World
+the toLowerCase() method converts the string to the lower case
+the toUpperCase() method converts the string to the upper case
+the replace() method replaces the character '!' with 'o'.
+Escape characters in strings
+
+Strings in Java are represented by double-quotes. For example,
+
+// create a string
+String example = "This is a string";
+Now if we want to include double-quotes in our string. For example,
+
+// include double quote 
+String example = "This is the "String" class";
+This will cause an error. It is because double-quotes are used to represent the string. Hence the compiler will treat "This is the " as a string.
+
+To solve this issue, the escape character \ is used in Java. Now we can include double-quotes in the string as:
+
+// use the escape character
+String example = "This is the \"String\" class.";
+The escape character tells the compiler to escape the double quote and read the whole text.
+
+Java Strings are Immutable
+In Java, creating a string means creating an object of the String class. When we create a string, we cannot change that string in Java. This is why strings are called immutable in Java.
+
+To understand it more deeply, let's consider an example:
+
+// create a string
+String example = "Hello!";
+Here, we have created a string object "Hello!". Once it is created, we cannot change it.
+
+Now suppose we want to change the string.
+
+// adds another string to the string
+example = example.concat(" World");
+Here, we have tried to add a new string to the previous string.
+
+Since strings are immutable, it should cause an error. But this works fine.
+
+Now it looks like we are able to change the string. However, this is not true. Let's see what has actually happened here.
+
+We have a string "Hello!", referenced by the variable named example. Now while executing the above code,
+
+the JVM takes the string "Hello!"
+appends the string " World" to it
+this creates a new string "Hello! World"
+the variable example now refers to the new string
+the previous string "Hello!" remains unchanged
+Note: Every time a new string is created and it is referenced by a variable.
+
+Creating strings using the new keyword
+So far we have created strings like primitive types in Java. However, since strings in Java are objects, we can create using the new keyword as well. For example,
+
+
+// create a string using the new keyword
+String name = new String("java string");
+In the above example, we have used the new keyword along with the constructor String() to create a string.
+
+The String class provides various other constructors to create strings. To learn about all those constructors, visit Java String (official Java documentation).
+
+Now, let's see how this process of creating strings differs from the previous one.
+
+Differences between Using String literals and new keyword
+Now that we know how strings are created using string literals and the new keyword, let's see what is the major difference between them.
+
+In Java, the JVM maintains a string pool to store all of its strings inside the memory. The string pool helps in reusing the strings.
+
+While creating strings using string literals, the value of the string is directly provided. Hence, the compiler first checks the string pool to see if the string already exists.
+
+If the string already exists, the new string is not created. Instead, the new reference points to the existing string.
+If the string doesn't exist, the new string is created.
+However, while creating strings using the new keyword, the value of the string is not directly provided. Hence the new string is created all the time.

@@ -1,0 +1,197 @@
+ava instanceof
+In this tutorial, you will learn about Java instanceof operator in detail with the help of examples.
+
+In Java, the instanceof keyword is a binary operator. It is used to check whether an object is an instance of a particular class or not.
+
+The operator also checks whether an object is an instance of a class that implements an interface (will be discussed later in this tutorial).
+
+The syntax of the instanceof is:
+
+result = objectName instanceof className;
+The left operand of the instanceof operator is the object name and the right operand is the class name. The result will be true if an object is an instance of a class and false if it is not.
+
+Example 1: instanceof
+class Main {
+    public static void main (String[] args) {
+        String name = "Programiz";
+        Integer age = 22;
+
+        System.out.println("Is name an instance of String: "+ (name instanceof String));
+        System.out.println("Is age an instance of Integer: "+ (age instanceof Integer));
+    }
+}
+Output:
+
+Is name an instance of String: true
+Is age an instance of Integer: true
+In the above example, we have created an object name of the String type and another object age of the Integer type. We then used the instanceof operator to check whether the name is of the String type and age is of the Integer type.
+
+Use of instanceof in Inheritance
+In the case of inheritance, the instanceof operator is used to check whether an object of a subclass is also an instance of the superclass.
+
+Example 2: instanceof in Inheritance
+class Animal {
+}
+
+// Dog class is a subclass of Animal
+class Dog extends Animal {
+}
+
+class Main {
+    public static void main(String[] args){
+        Dog d1 = new Dog();
+
+        // checks if d1 is an object of Dog
+        System.out.println("Is d1 an instance of Dog: "+ (d1 instanceof Dog));
+       
+        // checks if d1 is an object of Animal
+        System.out.println("Is d1 an instance of Animal: "+ (d1 instanceof Animal));
+    }
+}
+Output:
+
+Is d1 is an instance of Dog: true
+Is d1 an instance of Animal: true
+In the above example, d1 is an instance of both the Dog and the Animal class. Hence, both d1 instanceof Dog and d1 instanceof Animal result in true.
+
+The Object Class
+In Java, all the classes are inherited from the Object class. The extends keyword is not used during the inheritance of the Object class. This inheritance happens implicitly in Java.
+
+Example 3: Object Class
+class Animal {
+}
+
+class Dog {
+}
+
+class Cat {
+}
+class Main {
+    public static void main(String[] args) {
+        Dog d1 = new Dog();
+        Animal a1 = new Animal();
+        Cat c1 = new Cat();
+
+        System.out.println("Is d1 an instance of the Object class: "+ (d1 instanceof Object));
+        System.out.println("Is a1 an instance of the Object class: "+ (a1 instanceof Object));
+   
+        System.out.println("Is c1 an instance of the Object class: "+ (c1 instanceof Object));
+    }
+}
+Output:
+
+Is d1 an instance of the Object class: true
+Is a1 an instance of the Object class: true
+Is c1 an instance of the Object class: true
+In the above example, we have created objects a1, d1, and c1 of classes Animal, Dog, and Cat, respectively. We have used the instanceof operator to check whether these objects a1, d1 and c1 are also the objects of the Object class. The output results true for all.
+
+This is because the Object class is the root class defined in the java.lang package. All the other classes are child classes of the Object class forming a hierarchy in Java.
+
+Object Upcasting and Downcasting
+In Java, an object of a subclass can be treated as an object of the superclass. This is called upcasting.
+
+Java compiler automatically performs upcasting.
+
+Example 4: Object Upcasting
+class Animal {
+    public void displayInfo() {
+        System.out.println("I am an animal.");
+    }
+}
+
+class Dog extends Animal {
+}
+
+class Main {
+    public static void main(String[] args) {
+        Dog d1 = new Dog();
+        Animal a1 = d1;
+        a1.displayInfo();
+    }
+}
+
+Output:
+
+I am an animal.
+In the above example, we have created an object d1 of the Dog class. We use that d1 object to create an object a1 of the Animal class. This is called upcasting in Java.
+
+The code executes without any problem. This is because upcasting is automatically done by Java compilers.
+
+Downcasting is a reverse procedure of upcasting.
+
+In the case of downcasting, an object of the superclass is treated as an object of the subclass. We have to explicitly instruct the compiler to downcast in Java.
+
+Example 5: Object Downcasting Problem
+class Animal {
+}
+
+class Dog extends Animal {
+   public void displayInfo() {
+       System.out.println("I am a dog.");
+   }
+}
+
+class Main {
+   public static void main(String[] args) {
+       Animal a1 = new Animal();
+       Dog d1 = (Dog)a1; // Downcasting
+ 
+       d1.displayInfo();
+   }
+}
+When we run the program, we will get an exception named ClassCastException. Let's see what happens here.
+
+Here, we have created an object a1 of the superclass Animal. We then tried to cast the a1 object to the object d1 of the subclass Dog.
+
+This caused the problem. It is because the a1 object of the superclass Animal may also refer to other subclasses. Had we created another subclass Cat along with Dog; the Animal maybe Cat or it maybe Dog causing ambiguity.
+
+To resolve this problem we can use the instanceof operator. Here's how:
+
+Example 6: Resolving Downcasting Using instanceof
+class Animal {
+}
+
+class Dog extends Animal {
+  public void displayInfo() {
+     System.out.println("I am a dog");
+  }
+}
+
+class Main {
+  public static void main(String[] args) {
+    Dog d1 = new Dog();
+    Animal a1 = d1;    // Upcasting
+
+    if (a1 instanceof Dog){
+       Dog d2 = (Dog)a1;    // Downcasting
+       d2.displayInfo();
+    }
+  }
+}
+Output:
+
+I am a dog
+In the above example, we use the instanceof operator to check whether the a1 object is an instance of Dog class or not. The downcasting is done only when the expression a1 instanceof Dog is true.
+
+instanceof in Interface
+The instanceof operator is also used to check whether an object of a class is also an instance of the interface from where the class implements.
+
+Example 7: instanceof in Interface
+interface Animal {
+}
+
+class Dog implements Animal {
+}
+
+class Main {
+   public static void main(String[] args) {
+      Dog d1 = new Dog();
+      System.out.println("Is d1 an instance of Animal: "+(d1 instanceof Animal));
+   }
+}
+Output:
+
+Is d1 an instance of Animal: true
+In the above example, we have created a class Dog that implements the Animal interface.
+
+Then, the d1 object of the Dog class is created. We have used the instanceof operator to check whether the d1 object is also an instance of the Animal interface.

@@ -1,0 +1,370 @@
+Java Reflection
+In this tutorial, we will learn reflection, a feature in Java programming that allows us to inspect and modify classes, methods, etc.
+
+In Java, reflection allows us to inspect and manipulate classes, interfaces, constructors, methods, and fields at run time.
+
+Java class named Class
+Before we learn about reflection in Java, we need to know about a Java class named Class.
+
+There is a class in Java named Class that keeps all the information about objects and classes at runtime.
+
+The object of Class describes the properties of a particular class. This object is used to perform reflection.
+
+Create objects of the class named Class
+We can create objects of Class by
+
+using forName() Method
+forName() takes a string argument (name of a class) and returns an object of Class. The returned object refers to the class specified by the string. For example,
+
+Class Dog {  }
+Class c1 = Class.forName("Dog");
+using getClass() Method
+The getClass() method uses the object of a particular class to create a new object of Class. For example,
+
+Dog d1 = new Dog()
+Class c1 = d1.getClass();
+using .class
+We can also create objects of Class by using the .class extension. For example,
+
+Class c1 = Dog.class;
+Once the objects of Class are created, we can use these objects to perform reflection.
+
+Get Interfaces
+We can use the getInterfaces() method of Class to collect information about the interfaces implemented by the class. This method returns an array of interfaces.
+
+Example: Get Interfaces
+import java.lang.Class;
+import java.lang.reflect.*;
+
+interface Animal {
+   public void display();
+}
+
+interface Mammal {
+   public void makeSound();
+}
+
+class Dog implements Animal, Mammal {
+   public void display() {
+      System.out.println("I am a dog.");
+   }
+
+   public void makeSound() {
+      System.out.println("Bark bark");
+   }
+}
+
+class ReflectionDemo {
+  public static void main(String[] args) {
+      try {
+          // create an object of Dog class
+          Dog d1 = new Dog();
+
+          // create an object of Class using getClass()
+          Class obj = d1.getClass();
+        
+          // find the interfaces implemented by Dog
+          Class[] objInterface = obj.getInterfaces();
+          for(Class c : objInterface) {
+
+              // print the name of interfaces
+              System.out.println("Interface Name: " + c.getName());
+          }
+      }
+
+      catch(Exception e) {
+          e.printStackTrace();
+      }
+   }
+}
+Output
+
+Interface Name: Animal
+Interface Name: Mammal
+Get Superclass and Access Modifier
+The method getSuperclass() of the class Class can be used to get information about the superclass of a particular class.
+
+And also, Class provides a method getModifier() that returns the modifier of class in integer form.
+
+Example: Get Superclass and Access Modifier
+import java.lang.Class;
+import java.lang.reflect.*;
+
+interface Animal {
+   public void display();
+}
+
+public class Dog implements Animal {
+   public void display() {
+       System.out.println("I am a dog.");
+   }
+}
+
+class ReflectionDemo {
+   public static void main(String[] args) {
+       try {
+           // create an object of Dog class
+           Dog d1 = new Dog();
+
+           // create an object of Class using getClass()
+           Class obj = d1.getClass();
+
+          // Get the access modifier of Dog in integer form
+           int modifier = obj.getModifiers();
+           System.out.println("Modifier: " + Modifier.toString(modifier));
+
+           // Find the superclass of Dog
+           Class superClass = obj.getSuperclass();
+           System.out.println("Superclass: " + superClass.getName());
+       }
+
+       catch(Exception e) {
+           e.printStackTrace();
+       }
+   }
+}
+Output
+
+Modifier: public
+Superclass: Animal
+
+To learn about more methods of Class, visit java.lang.Class.
+
+Reflecting Fields, Methods, and Constructors
+The package java.lang.reflect provides classes that can be used for manipulating class members. For example,
+
+Method class - provides information about methods in a class
+Field class - provides information about fields in a class
+Constructor class - provides information about constructors in a class
+Reflection of a Field
+We can inspect and modify different fields of a class using various methods provided by the Field class.
+
+getFields() - returns all public fields from the class and its superclass
+getDeclaredFields() - returns all the fields of the class
+getModifier() - returns the modifier of fields in integer form
+set(classObject, value) - set the value of a field with the specified value
+get(classObject) - get the value of a field
+setAccessible(boolean) - make the private field accessible
+Note: If we know the name of a field, we can use
+
+getField("fieldName") - returns the public field having name fieldName from the class.
+getDeclaredField("fieldName") - returns the field having name fieldName from the class.
+To learn about more methods of the Field class visit, Field class.
+
+Example: Accessing Public Field
+import java.lang.Class;
+import java.lang.reflect.*;
+
+class Dog {
+  public String type;
+}
+
+class ReflectionDemo {
+  public static void main(String[] args) {
+     try{
+         Dog d1 = new Dog();
+        // create an object of the class Class
+         Class obj = d1.getClass();
+
+        // manipulating the public field type of Dog     
+         Field field1 = obj.getField("type");
+        // set the value of field
+         field1.set(d1, "labrador");
+       // get the value of field by converting in String
+         String typeValue = (String)field1.get(d1);
+         System.out.println("type: " + typeValue);
+
+         // get the access modifier of type
+         int mod1 = field1.getModifiers();
+         String modifier1 = Modifier.toString(mod1);
+         System.out.println("Modifier: " + modifier1);
+         System.out.println(" ");
+     }
+     catch(Exception e) {
+         e.printStackTrace();
+     }
+  }
+}
+Output
+
+type: labrador
+Modifier: public
+Example: Accessing Private Field
+import java.lang.Class;
+import java.lang.reflect.*;
+
+class Dog {
+ private String color;
+}
+
+class ReflectionDemo {
+public static void main(String[] args) {
+   try {
+      Dog d1 = new Dog();
+      // create an object of the class Class
+      Class obj = d1.getClass();
+
+      // accessing the private field
+      Field field2 = obj.getDeclaredField("color");
+     
+      // making the private field accessible
+      field2.setAccessible(true);
+      // set the value of color
+      field2.set(d1, "brown");
+      // get the value of type converting in String
+      String colorValue = (String)field2.get(d1);
+      System.out.println("color: " + colorValue);
+
+      // get the access modifier of color
+      int mod2 = field2.getModifiers();
+      String modifier2 = Modifier.toString(mod2);
+      System.out.println("modifier: " + modifier2);
+   }
+   catch(Exception e) {
+      e.printStackTrace();
+   }
+ }
+}
+Output
+
+color: brown
+modifier: private
+Reflection of Java Methods
+Like fields, we can inspect different methods of a class using various methods provided by the Method class.
+
+getMethods() - returns all public methods of the class and its superclass
+getDeclaredMethod() - returns all methods of the class
+getName() - returns the name of methods
+getModifiers() - returns the access modifier of methods in integer form
+getReturnType() - returns the return type of methods
+To learn about more methods of the Method class visit, Method class.
+
+Example: Method Reflection
+import java.lang.Class;
+import java.lang.reflect.*;
+
+class Dog {
+   public void display() {
+      System.out.println("I am a dog.");
+   }
+
+   protected void eat() {
+      System.out.println("I eat dog food.");
+   }
+
+   private void makeSound() {
+      System.out.println("Bark Bark");
+   }
+
+}
+
+class ReflectionDemo {
+   public static void main(String[] args) {
+      try {
+          Dog d1 = new Dog();
+
+          // create an object of Class
+          Class obj = d1.getClass();
+          
+          // get all the methods using the getDeclaredMethod()
+          Method[] methods = obj.getDeclaredMethods();
+
+          // get the name of methods
+          for(Method m : methods) {
+               
+             System.out.println("Method Name: " + m.getName());
+              
+             // get the access modifier of methods
+             int modifier = m.getModifiers();
+             System.out.println("Modifier: " + Modifier.toString(modifier));
+              
+             // get the return types of method
+             System.out.println("Return Types: " + m.getReturnType());
+             System.out.println(" ");
+          }
+       }
+       catch(Exception e) {
+           e.printStackTrace();
+       }
+   }
+}
+Output
+
+Method Name: display
+Modifier: public
+Return type: void
+
+Method Name: eat
+Modifier: protected
+Return Type: void
+
+Method Name: makeSound
+Modifier: private
+Return Type: void
+Reflection of Constructor
+We can also inspect different constructors of a class using various methods provided by the Constructor class.
+
+getConstructors() - returns all public constructors of a class and superclass of the class
+getDeclaredConstructor() - returns all the constructors
+getName() - returns the name of constructors
+getModifiers() - returns the access modifier of constructors in integer form
+getParameterCount() - returns the number of parameters of constructors
+To learn about more methods of the Constructor class, visit Constructor class
+
+Example: Constructor reflection
+import java.lang.Class;
+import java.lang.reflect.*;
+
+class Dog {
+
+   public Dog() {
+      
+   }
+   public Dog(int age) {
+      
+   }
+
+   private Dog(String sound, String type) {
+      
+   }
+}
+
+class ReflectionDemo {
+   public static void main(String[] args) {
+      try {
+           Dog d1 = new Dog();
+           Class obj = d1.getClass();
+
+           // get all the constructors in a class using getDeclaredConstructor()
+           Constructor[] constructors = obj.getDeclaredConstructors();
+
+           for(Constructor c : constructors) {
+           // get names of constructors
+               System.out.println("Constructor Name: " + c.getName());
+
+           // get access modifier of constructors
+               int modifier = c.getModifiers();
+               System.out.println("Modifier: " + Modifier.toString(modifier));
+
+           // get the number of parameters in constructors
+               System.out.println("Parameters: " + c.getParameterCount());
+          }
+       }
+       catch(Exception e) {
+           e.printStackTrace();
+       }
+    }
+}
+Output
+
+Constructor Name: Dog
+Modifier: public
+Parameters: 0
+
+Constructor Name: Dog
+Modifier: public
+Parameters: 1
+
+Constructor Name: Dog
+Modifier: private
+Parameters: 2

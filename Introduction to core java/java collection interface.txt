@@ -1,0 +1,34 @@
+Java Collection Interface
+In this tutorial, we will learn about the Java Collection interface and its subinterfaces.
+
+The Collection interface is the root interface of the Java collections framework.
+
+There is no direct implementation of this interface. However, it is implemented through its subinterfaces like List, Set, and Queue.
+
+For example, the ArrayList class implements the List interface which is a subinterface of the Collection Interface.
+
+Java Collection Interface and its subinterfaces.
+
+Subinterfaces of Collection
+As mentioned above, the Collection interface includes subinterfaces that are implemented by various classes in Java.
+
+1. List Interface
+
+The List interface is an ordered collection that allows us to add and remove elements like an array. To learn more, visit: Java List Interface.
+
+2. Set Interface
+The Set interface allows us to store elements in different sets similar to the set in mathematics. It cannot have duplicate elements. To learn more, visit: Java Set Interface.
+
+3. Queue Interface
+The Queue interface is used when we want to store and access elements in First In, First Out(FIFO) manner. To learn more, visit: Java Queue Interface.
+
+Methods of Collection
+The Collection interface includes various methods that can be used to perform different operations on objects. These methods are available in all its subinterfaces.
+
+add() - inserts the specified element to the collection
+size() - returns the size of the collection
+remove() - removes the specified element from the collection
+iterator() - returns an iterator to access elements of the collection
+addAll() - adds all the elements of a specified collection to the collection
+removeAll() - removes all the elements of the specified collection from the collection
+clear() - removes all the elements of the collection

@@ -1,0 +1,45 @@
+https://www.programiz.com/java-programming/io-streams
+java I/O Streams
+In this tutorial, we will learn about Java input/output streams and their types.
+
+In Java, streams are the sequence of data that are read from the source and written to the destination.
+
+An input stream is used to read data from the source. And, an output stream is used to write data to the destination.
+
+class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!"); 
+    }
+}
+For example, in our first Hello World example, we have used System.out to print a string. Here, the System.out is a type of output stream.
+
+Similarly, there are input streams to take input.
+
+Input stream reads data from source to program and output stream writes file from program to destination
+
+We will learn about input streams and output streams in detail in the later tutorials.
+
+Types of Streams
+Depending upon the data a stream holds, it can be classified into:
+
+Byte Stream
+Character Stream
+Byte Stream
+
+Byte stream is used to read and write a single byte (8 bits) of data.
+
+All byte stream classes are derived from base abstract classes called InputStream and OutputStream.
+
+To learn more, visit
+
+Java InputStream Class
+Java OutputStream Class
+Character Stream
+Character stream is used to read and write a single character of data.
+
+All the character stream classes are derived from base abstract classes Reader and Writer.
+
+To learn more, visit
+
+Java Reader Class
+Java Writer Class
